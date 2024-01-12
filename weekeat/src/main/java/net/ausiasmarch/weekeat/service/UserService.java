@@ -1,9 +1,6 @@
 package net.ausiasmarch.weekeat.service;
 
-import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,13 +21,14 @@ public class UserService {
     @Autowired
     SessionService oSessionService;
 
-   /* @Autowired
-    EmailService oEmailService;
- */
+    /*
+     * @Autowired
+     * EmailService oEmailService;
+     */
     private final String genericPasswd = "c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261";
 
-    public UserEntity get(Long id) {
-        return oUserRepository.findById(id)
+    public UserEntity get(Long id_user) {
+        return oUserRepository.findById(id_user)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
@@ -61,41 +59,6 @@ public class UserService {
         return id;
     }
 
-    /*
-     * public UserEntity getOneRandom() {
-     * Pageable oPageable = PageRequest.of((int) (Math.random() *
-     * oUserRepository.count()), 1);
-     * return oUserRepository.findAll(oPageable).getContent().get(0);
-     * }
-     * 
-     * public Page<UserEntity> getPage(Pageable oPageable) {
-     * return oUserRepository.findAll(oPageable);
-     * }
-     * 
-     * public Page<UserEntity> getPageByCitasNumberDesc(Pageable oPageable) {
-     * 
-     * return oUserRepository.findVetssByCitasNumberDescFilter(oPageable);
-     * }
-     * 
-     * public Long populate(Integer amount) {
-     * 
-     * for (int i = 0; i < amount; i++) {
-     * String password = "unapasswordsegura12345567789976543" + i;
-     * String name = DataGenerationHelper.getRadomName();
-     * String surname = DataGenerationHelper.getRadomSurname();
-     * String email = name.substring(0, 3) + surname.substring(0, 3) + i
-     * + "@ausiasmarch.net";
-     * String username = DataGenerationHelper
-     * .doNormalizeString(
-     * name.substring(0, 3) + surname.substring(1, 3) + i);
-     * oUserRepository.save(
-     * new UserEntity(name, surname, email, username, password,
-     * "32323232r", "648956235", true));
-     * }
-     * return oUserRepository.count();
-     * 
-     * }
-     */
     @Transactional
     public Long empty() {
         oUserRepository.deleteAll();

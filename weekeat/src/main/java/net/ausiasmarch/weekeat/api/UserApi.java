@@ -23,9 +23,9 @@ public class UserApi {
     @Autowired
     UserService oUserService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserEntity> get(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(oUserService.get(id));
+    @GetMapping("/{id_user}")
+    public ResponseEntity<UserEntity> get(@PathVariable("id_user") Long id_user) {
+        return ResponseEntity.ok(oUserService.get(id_user));
     }
 
     @PostMapping("")
@@ -39,24 +39,11 @@ public class UserApi {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id_user}")
     public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
         return ResponseEntity.ok(oUserService.delete(id));
     }
-/* 
-    @GetMapping("")
-    public ResponseEntity<Page<UserEntity>> getPage(
-            Pageable oPageable) {
-        return ResponseEntity.ok(oUserService.getPage(oPageable));
-    }
 
-    // Endpoint
-    @PostMapping("/populate/{amount}")
-    public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount) {
-        return ResponseEntity.ok(oUserService.populate(amount));
-
-    }
-*/
     @DeleteMapping("/empty")
     public ResponseEntity<Long> empty() {
         return ResponseEntity.ok(oUserService.empty());

@@ -1,15 +1,12 @@
 package net.ausiasmarch.weekeat.entity;
 
-import java.util.ArrayList;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -55,10 +52,29 @@ public class UserEntity {
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal")
     private String password = "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e";
 
+    @Lob
+    private byte[] profile_picture;
+
     public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,
             @NotNull @NotBlank @Size(min = 6, max = 256) @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal") String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,
+            @NotBlank @NotNull @Size(min = 3, max = 255) String name,
+            @NotBlank @NotNull @Size(min = 3, max = 255) String surname, @Email String email,
+            @NotNull @NotBlank @Size(min = 8, max = 20) @Pattern(regexp = "^[0-9]+$", message = "Phone number must be decimal") String phone,
+            @NotNull @NotBlank @Size(min = 6, max = 256) @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal") String password,
+            byte[] profile_picture, Boolean role) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.profile_picture = profile_picture;
+        this.role = role;
     }
 
     public UserEntity(Long id_user, @NotBlank @NotNull @Size(min = 6, max = 255) String username,
@@ -157,6 +173,14 @@ public class UserEntity {
 
     public void setRole(Boolean role) {
         this.role = role;
+    }
+
+    public byte[] getProfile_picture() {
+        return profile_picture;
+    }
+
+    public void setProfile_picture(byte[] profile_picture) {
+        this.profile_picture = profile_picture;
     }
 
 }

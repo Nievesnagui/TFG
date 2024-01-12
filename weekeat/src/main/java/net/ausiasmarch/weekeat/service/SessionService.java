@@ -1,11 +1,7 @@
 package net.ausiasmarch.weekeat.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpServletRequest;
-import net.ausiasmarch.weekeat.entity.UserEntity;
-import net.ausiasmarch.weekeat.repository.UserRepository;
 
 @Service
 public class SessionService {
