@@ -1,5 +1,8 @@
 package net.ausiasmarch.weekeat.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
@@ -7,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -55,6 +59,11 @@ public class UserEntity {
     @Lob
     private byte[] profile_picture;
 
+    //Gestionar qué tengo que hacer con las recetas 
+
+    @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<FavRecipeEntity> favs;
+
     public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,
             @NotNull @NotBlank @Size(min = 6, max = 256) @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal") String password) {
         this.username = username;
@@ -92,6 +101,7 @@ public class UserEntity {
     }
 
     public UserEntity() {
+        favs = new ArrayList<>();
     }
 
     public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,

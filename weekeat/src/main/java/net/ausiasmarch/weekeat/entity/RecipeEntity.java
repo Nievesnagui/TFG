@@ -1,5 +1,8 @@
 package net.ausiasmarch.weekeat.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -35,7 +39,15 @@ public class RecipeEntity {
     @Lob
     private byte[] recipe_image;
 
+    @OneToMany(mappedBy = "ingredient", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<ContentEntity> content;
+    
+    @OneToMany(mappedBy = "recipe", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<FavRecipeEntity> favs;
+
     public RecipeEntity() {
+        content = new ArrayList<>();
+        favs = new ArrayList<>();
     }
 
     public RecipeEntity(UserEntity id_user, @NotBlank @NotNull @Size(min = 6, max = 255) String name,
@@ -101,7 +113,5 @@ public class RecipeEntity {
     public void setRecipe_image(byte[] recipe_image) {
         this.recipe_image = recipe_image;
     }
-
-    
 
 }
