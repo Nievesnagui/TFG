@@ -59,10 +59,11 @@ public class UserEntity {
     @Lob
     private byte[] profile_picture;
 
-    //Gestionar qué tengo que hacer con las recetas 
-
     @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
+
+    @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<WeeklyEntity> weeks;
 
     public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,
             @NotNull @NotBlank @Size(min = 6, max = 256) @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal") String password) {
@@ -102,6 +103,7 @@ public class UserEntity {
 
     public UserEntity() {
         favs = new ArrayList<>();
+        weeks = new ArrayList<>();
     }
 
     public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,

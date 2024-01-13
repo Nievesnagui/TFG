@@ -45,9 +45,13 @@ public class RecipeEntity {
     @OneToMany(mappedBy = "recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
 
+    @OneToMany(mappedBy = "weekly", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<ScheduleEntity> schedules;
+
     public RecipeEntity() {
         content = new ArrayList<>();
         favs = new ArrayList<>();
+        schedules = new ArrayList<>();
     }
 
     public RecipeEntity(UserEntity id_user, @NotBlank @NotNull @Size(min = 6, max = 255) String name,

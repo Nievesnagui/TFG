@@ -17,21 +17,21 @@ public class ContentEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_ingredient")
-    private TypeEntity id_ingredient;
+    private IngredientEntity id_ingredient;
 
     @ManyToOne
     @JoinColumn(name = "id_recipe")
-    private TypeEntity id_recipe;
+    private RecipeEntity id_recipe;
 
     public ContentEntity() {
     }
 
-    public ContentEntity(TypeEntity id_ingredient, TypeEntity id_recipe) {
+    public ContentEntity(IngredientEntity id_ingredient, RecipeEntity id_recipe) {
         this.id_ingredient = id_ingredient;
         this.id_recipe = id_recipe;
     }
 
-    public ContentEntity(Long id_content, TypeEntity id_ingredient, TypeEntity id_recipe) {
+    public ContentEntity(Long id_content, IngredientEntity id_ingredient, RecipeEntity id_recipe) {
         this.id_content = id_content;
         this.id_ingredient = id_ingredient;
         this.id_recipe = id_recipe;
@@ -45,19 +45,19 @@ public class ContentEntity {
         this.id_content = id_content;
     }
 
-    public TypeEntity getId_ingredient() {
+    public IngredientEntity getId_ingredient() {
         return id_ingredient;
     }
 
-    public void setId_ingredient(TypeEntity id_ingredient) {
+    public void setId_ingredient(IngredientEntity id_ingredient) {
         this.id_ingredient = id_ingredient;
     }
 
-    public TypeEntity getId_recipe() {
+    public RecipeEntity getId_recipe() {
         return id_recipe;
     }
 
-    public void setId_recipe(TypeEntity id_recipe) {
+    public void setId_recipe(RecipeEntity id_recipe) {
         this.id_recipe = id_recipe;
     }
 

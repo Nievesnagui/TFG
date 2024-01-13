@@ -17,21 +17,21 @@ public class FavRecipeEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private TypeEntity id_user;
+    private UserEntity id_user;
 
     @ManyToOne
     @JoinColumn(name = "id_recipe")
-    private TypeEntity id_recipe;
+    private RecipeEntity id_recipe;
 
     public FavRecipeEntity() {
     }
 
-    public FavRecipeEntity(TypeEntity id_user, TypeEntity id_recipe) {
+    public FavRecipeEntity(UserEntity id_user, RecipeEntity id_recipe) {
         this.id_user = id_user;
         this.id_recipe = id_recipe;
     }
 
-    public FavRecipeEntity(Long id_fav, TypeEntity id_user, TypeEntity id_recipe) {
+    public FavRecipeEntity(Long id_fav, UserEntity id_user, RecipeEntity id_recipe) {
         this.id_fav = id_fav;
         this.id_user = id_user;
         this.id_recipe = id_recipe;
@@ -45,19 +45,19 @@ public class FavRecipeEntity {
         this.id_fav = id_fav;
     }
 
-    public TypeEntity getId_user() {
+    public UserEntity getId_user() {
         return id_user;
     }
 
-    public void setId_user(TypeEntity id_user) {
+    public void setId_user(UserEntity id_user) {
         this.id_user = id_user;
     }
 
-    public TypeEntity getId_recipe() {
+    public RecipeEntity getId_recipe() {
         return id_recipe;
     }
 
-    public void setId_recipe(TypeEntity id_recipe) {
+    public void setId_recipe(RecipeEntity id_recipe) {
         this.id_recipe = id_recipe;
     }
 }
