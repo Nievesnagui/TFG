@@ -27,8 +27,8 @@ public class RecipeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
     }
 
-    public RecipeEntity getByRecipeName(String name) {
-        return oRecipeRepository.findByRecipeName(name)
+    public RecipeEntity getByName(String name) {
+        return oRecipeRepository.findByName(name)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found by name"));
     }
 

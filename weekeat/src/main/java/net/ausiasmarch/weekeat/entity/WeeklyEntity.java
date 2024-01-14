@@ -32,7 +32,7 @@ public class WeeklyEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime end_date;
 
-    @OneToMany(mappedBy = "weekly", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_weekly", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ScheduleEntity> schedules;
     
     public WeeklyEntity() {

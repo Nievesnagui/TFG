@@ -25,7 +25,7 @@ public class ScheduleEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_recipe")
-    private WeeklyEntity id_recipe;
+    private RecipeEntity id_recipe;
 
     @NotBlank
     @NotNull
@@ -40,7 +40,7 @@ public class ScheduleEntity {
     public ScheduleEntity() {
     }
 
-    public ScheduleEntity(WeeklyEntity id_weekly, WeeklyEntity id_recipe,
+    public ScheduleEntity(WeeklyEntity id_weekly, RecipeEntity id_recipe,
             @NotBlank @NotNull @Size(min = 2, max = 20) String type,
             @NotBlank @NotNull @Size(min = 2, max = 20) String day) {
         this.id_weekly = id_weekly;
@@ -51,7 +51,7 @@ public class ScheduleEntity {
 
 
 
-    public ScheduleEntity(Long id_schedule, WeeklyEntity id_weekly, WeeklyEntity id_recipe,
+    public ScheduleEntity(Long id_schedule, WeeklyEntity id_weekly, RecipeEntity id_recipe,
             @NotBlank @NotNull @Size(min = 2, max = 20) String type,
             @NotBlank @NotNull @Size(min = 2, max = 20) String day) {
         this.id_schedule = id_schedule;
@@ -79,11 +79,11 @@ public class ScheduleEntity {
         this.id_weekly = id_weekly;
     }
 
-    public WeeklyEntity getId_recipe() {
+    public RecipeEntity getId_recipe() {
         return id_recipe;
     }
 
-    public void setId_recipe(WeeklyEntity id_recipe) {
+    public void setId_recipe(RecipeEntity id_recipe) {
         this.id_recipe = id_recipe;
     }
 

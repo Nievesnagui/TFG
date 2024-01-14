@@ -27,8 +27,8 @@ public class IngredientService {
               .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
     }
 
-    public IngredientEntity getByIngredientName(String name) {
-        return oIngredientRepository.findByIngredientName(name)
+    public IngredientEntity getByName(String name) {
+        return oIngredientRepository.findByName(name)
             .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found by name"));
     }
 

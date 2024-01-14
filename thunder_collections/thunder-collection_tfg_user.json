@@ -1,0 +1,111 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "tfg_user",
+    "dateExported": "2024-01-14T13:25:09.381Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "d36d2ecb-5567-44e4-abe7-320375fcb209",
+            "colId": "ed534612-c4e7-4aa4-b513-ae7cd6f9e811",
+            "containerId": "",
+            "name": "Crear Usuario",
+            "url": "http://localhost:8083/user",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-14T12:37:25.069Z",
+            "modified": "2024-01-14T13:14:27.020Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"username\":\"prueba2\",\n \"name\":\"Prueba\",\n  \"surname\":\"Prueba\",\n  \"email\":\"correo2@mail.com\",\n  \"phone\":\"654987412\",\n  \"password\":\"123456789\",\n  \"role\":true\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "46c73b84-3ca4-406b-a522-53a3449df262",
+            "colId": "ed534612-c4e7-4aa4-b513-ae7cd6f9e811",
+            "containerId": "",
+            "name": "Leer Usuario",
+            "url": "http://localhost:8083/user/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-14T13:15:14.030Z",
+            "modified": "2024-01-14T13:15:14.030Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6830a12c-2b51-4ad4-b223-bd9109e1b9e4",
+            "colId": "ed534612-c4e7-4aa4-b513-ae7cd6f9e811",
+            "containerId": "",
+            "name": "Leer Usuario (nombre)",
+            "url": "http://localhost:8083/user/byUsername/useradmin",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-01-14T13:20:58.094Z",
+            "modified": "2024-01-14T13:21:25.407Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "828c407a-95df-47fc-a050-a869e013e4cd",
+            "colId": "ed534612-c4e7-4aa4-b513-ae7cd6f9e811",
+            "containerId": "",
+            "name": "Editar Usuario",
+            "url": "http://localhost:8083/user",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-01-14T13:15:40.700Z",
+            "modified": "2024-01-14T13:16:50.520Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id_user\": 6,\n \"username\":\"prueba2\",\n \"name\":\"Pepe\",\n  \"surname\":\"Prueba\",\n  \"email\":\"correo2@mail.com\",\n  \"phone\":\"654987412\",\n  \"password\":\"123456789\",\n  \"role\":true\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ef6627eb-47e9-4451-b593-c2eff5abb783",
+            "colId": "ed534612-c4e7-4aa4-b513-ae7cd6f9e811",
+            "containerId": "",
+            "name": "Eliminar Usuario",
+            "url": "http://localhost:8083/user/6",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-01-14T13:17:25.107Z",
+            "modified": "2024-01-14T13:18:33.666Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkZTYwMmE4ZS05NWFkLTQyN2ItOTE0MS1hOGQ2NmI4YWJjYzkiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE3MDAzMDY2ODksImV4cCI6MTcwMDMwODE4OSwibmFtZSI6InVzZXJhZG1pbiJ9.tlg3_67MiIUWL5M2qdKFlAZxaQrUEswXSiqgstvmfJYv2Gi37xMvtlGqPf2_3suAHUnrc1Aum5tXr9nGutE22w"
+            },
+            "tests": []
+        },
+        {
+            "_id": "4e52e8c2-bcaa-4d2b-bfb1-6628ee5a997c",
+            "colId": "ed534612-c4e7-4aa4-b513-ae7cd6f9e811",
+            "containerId": "",
+            "name": "**Vaciar Usuarios**",
+            "url": "http://localhost:8083/user/empty",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-01-14T13:19:52.245Z",
+            "modified": "2024-01-14T13:19:58.853Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkZTYwMmE4ZS05NWFkLTQyN2ItOTE0MS1hOGQ2NmI4YWJjYzkiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE3MDAzMDY2ODksImV4cCI6MTcwMDMwODE4OSwibmFtZSI6InVzZXJhZG1pbiJ9.tlg3_67MiIUWL5M2qdKFlAZxaQrUEswXSiqgstvmfJYv2Gi37xMvtlGqPf2_3suAHUnrc1Aum5tXr9nGutE22w"
+            },
+            "tests": []
+        }
+    ]
+}

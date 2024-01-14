@@ -39,13 +39,13 @@ public class RecipeEntity {
     @Lob
     private byte[] recipe_image;
 
-    @OneToMany(mappedBy = "ingredient", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ContentEntity> content;
     
-    @OneToMany(mappedBy = "recipe", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
 
-    @OneToMany(mappedBy = "weekly", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ScheduleEntity> schedules;
 
     public RecipeEntity() {

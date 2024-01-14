@@ -51,6 +51,8 @@ public class UserService {
         oUserEntityAux.setEmail(oUserEntity.getEmail());
         oUserEntityAux.setUsername(oUserEntity.getUsername());
         oUserEntityAux.setPhone(oUserEntity.getPhone());
+        oUserEntityAux.setRole(oUserEntity.getRole());
+        oUserEntityAux.setProfile_picture(oUserEntity.getProfile_picture());
         return oUserRepository.save(oUserEntityAux);
     }
 
@@ -63,13 +65,13 @@ public class UserService {
     public Long empty() {
         oUserRepository.deleteAll();
         // oUserRepository.resetAutoIncrement();
-        UserEntity oUserEntity1 = new UserEntity("useradmin", "Admin", "Apellido", "mail@mail.com",
+        UserEntity oUserEntity1 = new UserEntity("administrador", "Admin", "Apellido", "mail1@mail.com",
                 "658945123", "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e",
                 false);
         oUserRepository.save(oUserEntity1);
-        oUserEntity1 = new UserEntity("User", "Apellido", "mail@mail.com",
-                "useruser", "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e",
-                "658945123", true);
+        oUserEntity1 = new UserEntity("usuario", "Admin", "Apellido", "mail2@mail.com",
+        "658945123", "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e",
+        false);
         oUserRepository.save(oUserEntity1);
         return oUserRepository.count();
     }

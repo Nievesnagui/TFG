@@ -59,10 +59,10 @@ public class UserEntity {
     @Lob
     private byte[] profile_picture;
 
-    @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
 
-    @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<WeeklyEntity> weeks;
 
     public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,

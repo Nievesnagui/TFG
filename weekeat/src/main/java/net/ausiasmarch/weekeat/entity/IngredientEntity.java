@@ -35,7 +35,7 @@ public class IngredientEntity {
     @Lob
     private byte[] ingredient_image;
 
-    @OneToMany(mappedBy = "ingredient", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_ingredient", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ContentEntity> content;
 
     public IngredientEntity() {
@@ -46,7 +46,7 @@ public class IngredientEntity {
         this.id_type = id_type;
         this.name = name;
     }
-    
+
     public IngredientEntity(Long id_ingredient, TypeEntity id_type,
             @NotBlank @NotNull @Size(min = 6, max = 255) String name, byte[] ingredient_image) {
         this.id_ingredient = id_ingredient;

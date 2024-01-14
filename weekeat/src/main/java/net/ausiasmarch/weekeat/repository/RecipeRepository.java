@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import net.ausiasmarch.weekeat.entity.RecipeEntity;
 
 public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
-    Optional<RecipeEntity> findByRecipeName(String name);
+    Optional<RecipeEntity> findByName(String name);
 
     @Modifying
     @Query(value = "ALTER TABLE recipe AUTO_INCREMENT = 1", nativeQuery = true)

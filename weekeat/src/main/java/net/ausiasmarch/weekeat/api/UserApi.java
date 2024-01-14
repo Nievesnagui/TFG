@@ -40,8 +40,8 @@ public class UserApi {
     }
 
     @DeleteMapping("/{id_user}")
-    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(oUserService.delete(id));
+    public ResponseEntity<Long> delete(@PathVariable("id_user") Long id_user) {
+        return ResponseEntity.ok(oUserService.delete(id_user));
     }
 
     @DeleteMapping("/empty")

@@ -25,7 +25,7 @@ public class TypeEntity {
     @Size(min = 6, max = 255)
     private String name;
 
-    @OneToMany(mappedBy = "type", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_type", fetch = jakarta.persistence.FetchType.LAZY)
     private List<IngredientEntity> ingredients;
 
     public TypeEntity() {
