@@ -1,0 +1,93 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "tfg_type",
+    "dateExported": "2024-01-15T11:06:38.286Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "964e47b5-e0dd-4259-8c6e-1e08b5be7685",
+            "colId": "8bcea108-ddcf-4a9f-96a2-fc14841fd4f6",
+            "containerId": "",
+            "name": "Crear Tipo",
+            "url": "http://localhost:8083/type",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-15T10:31:22.515Z",
+            "modified": "2024-01-15T10:33:49.681Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"name\":\"meat\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "02ad34fe-2626-4e21-a396-0e124c36485f",
+            "colId": "8bcea108-ddcf-4a9f-96a2-fc14841fd4f6",
+            "containerId": "",
+            "name": "Leer Type",
+            "url": "http://localhost:8083/type/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-15T10:31:22.516Z",
+            "modified": "2024-01-15T10:34:01.791Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "eee6cc18-0664-43de-9e2c-6090b7ecef01",
+            "colId": "8bcea108-ddcf-4a9f-96a2-fc14841fd4f6",
+            "containerId": "",
+            "name": "Leer Type (nombre)",
+            "url": "http://localhost:8083/type/byName/dairy",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-01-15T10:58:46.107Z",
+            "modified": "2024-01-15T11:01:00.602Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "463ecc8e-9eb5-4146-909c-3073819aab2e",
+            "colId": "8bcea108-ddcf-4a9f-96a2-fc14841fd4f6",
+            "containerId": "",
+            "name": "Editar Type",
+            "url": "http://localhost:8083/type",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-01-15T10:31:22.518Z",
+            "modified": "2024-01-15T10:35:06.590Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id_type\": 3,\n \"name\":\"prueba\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "39db2154-836b-4ce6-8a67-bd66e4fb999e",
+            "colId": "8bcea108-ddcf-4a9f-96a2-fc14841fd4f6",
+            "containerId": "",
+            "name": "Eliminar Type",
+            "url": "http://localhost:8083/type/3",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-01-15T10:31:22.519Z",
+            "modified": "2024-01-15T10:35:34.838Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkZTYwMmE4ZS05NWFkLTQyN2ItOTE0MS1hOGQ2NmI4YWJjYzkiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE3MDAzMDY2ODksImV4cCI6MTcwMDMwODE4OSwibmFtZSI6InVzZXJhZG1pbiJ9.tlg3_67MiIUWL5M2qdKFlAZxaQrUEswXSiqgstvmfJYv2Gi37xMvtlGqPf2_3suAHUnrc1Aum5tXr9nGutE22w"
+            },
+            "tests": []
+        }
+    ]
+}

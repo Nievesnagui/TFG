@@ -1,0 +1,93 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "tfg_ingredient",
+    "dateExported": "2024-01-15T11:06:26.727Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "9c9780a1-466a-4d49-8e43-16faa9167e9c",
+            "colId": "70c788d1-e752-4176-bd3c-36d1b2fbc275",
+            "containerId": "",
+            "name": "Crear Ingrediente",
+            "url": "http://localhost:8083/ingredient",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-15T10:36:43.061Z",
+            "modified": "2024-01-15T11:06:00.087Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"name\":\"prueba\",\n  \"id_type\": {\n  \"id_type\": 2\n}\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "836641f9-19a6-4549-989c-7b13ffe3902a",
+            "colId": "70c788d1-e752-4176-bd3c-36d1b2fbc275",
+            "containerId": "",
+            "name": "Leer Ingrediente",
+            "url": "http://localhost:8083/ingredient/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-15T10:36:43.062Z",
+            "modified": "2024-01-15T10:41:44.826Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "304fce45-e118-491c-b224-3c0d995c8cb3",
+            "colId": "70c788d1-e752-4176-bd3c-36d1b2fbc275",
+            "containerId": "",
+            "name": "Leer Ingrediente (nombre)",
+            "url": "http://localhost:8083/ingredient/byName/yogurt",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-01-15T10:36:43.063Z",
+            "modified": "2024-01-15T11:03:59.727Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e169e5ac-16d9-4c3d-bf45-66a3e837f795",
+            "colId": "70c788d1-e752-4176-bd3c-36d1b2fbc275",
+            "containerId": "",
+            "name": "Editar Ingrediente",
+            "url": "http://localhost:8083/ingredient",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-01-15T10:36:43.064Z",
+            "modified": "2024-01-15T11:05:29.192Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id_ingredient\": 1,\n  \"id_type\": {\n    \"id_type\": 1\n  },\n  \"name\": \"yogurt prueba\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d1b92a1e-e866-4760-8974-acb17219a137",
+            "colId": "70c788d1-e752-4176-bd3c-36d1b2fbc275",
+            "containerId": "",
+            "name": "Eliminar Ingrediente",
+            "url": "http://localhost:8083/user/2",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-01-15T10:36:43.065Z",
+            "modified": "2024-01-15T11:06:08.036Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkZTYwMmE4ZS05NWFkLTQyN2ItOTE0MS1hOGQ2NmI4YWJjYzkiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE3MDAzMDY2ODksImV4cCI6MTcwMDMwODE4OSwibmFtZSI6InVzZXJhZG1pbiJ9.tlg3_67MiIUWL5M2qdKFlAZxaQrUEswXSiqgstvmfJYv2Gi37xMvtlGqPf2_3suAHUnrc1Aum5tXr9nGutE22w"
+            },
+            "tests": []
+        }
+    ]
+}

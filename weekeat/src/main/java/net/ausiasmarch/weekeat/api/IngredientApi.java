@@ -50,5 +50,10 @@ public class IngredientApi {
     public ResponseEntity<Page<IngredientEntity>> getPage(Pageable oPageable) {
         return ResponseEntity.ok(oIngredientService.getPage(oPageable));
     }
+
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<IngredientEntity> get(@PathVariable("name") String name) {
+        return ResponseEntity.ok(oIngredientService.getByName(name));
+    }
     
 }

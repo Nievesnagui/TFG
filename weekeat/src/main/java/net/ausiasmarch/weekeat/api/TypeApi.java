@@ -50,4 +50,9 @@ public class TypeApi {
     public ResponseEntity<Page<TypeEntity>> getPage(Pageable oPageable) {
         return ResponseEntity.ok(oTypeService.getPage(oPageable));
     }
+
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<TypeEntity> get(@PathVariable("name") String name) {
+        return ResponseEntity.ok(oTypeService.getByTypeName(name));
+    }
 }

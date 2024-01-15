@@ -22,7 +22,7 @@ public class TypeEntity {
 
     @NotBlank
     @NotNull
-    @Size(min = 6, max = 255)
+    @Size(min = 2, max = 255)
     private String name;
 
     @OneToMany(mappedBy = "id_type", fetch = jakarta.persistence.FetchType.LAZY)
@@ -32,7 +32,7 @@ public class TypeEntity {
         ingredients = new ArrayList<>();
     }
 
-    public TypeEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String name) {
+    public TypeEntity(@NotBlank @NotNull @Size(min = 2, max = 255) String name) {
         this.name = name;
     }
 
