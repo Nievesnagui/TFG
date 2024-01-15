@@ -1,0 +1,93 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "tfg_recipe",
+    "dateExported": "2024-01-15T16:35:51.227Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "7e19bd99-ba55-4fb2-807d-1f8227cbaaec",
+            "colId": "8fd51e08-0362-4641-a315-dc928a0c14ed",
+            "containerId": "",
+            "name": "Crear Receta",
+            "url": "http://localhost:8083/recipe",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-15T11:08:28.597Z",
+            "modified": "2024-01-15T16:35:28.576Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"description\":\"instrucciones\",\n  \"id_user\": {\n  \"id_user\": 9\n  },\n  \"name\":\"Para borrar\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "266e53fc-a63a-4a9e-96f4-16801a60de25",
+            "colId": "8fd51e08-0362-4641-a315-dc928a0c14ed",
+            "containerId": "",
+            "name": "Leer Receta",
+            "url": "http://localhost:8083/recipe/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-15T11:08:28.598Z",
+            "modified": "2024-01-15T16:31:55.670Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4f172a32-4766-463f-8d06-175b43317be3",
+            "colId": "8fd51e08-0362-4641-a315-dc928a0c14ed",
+            "containerId": "",
+            "name": "Leer Receta (nombre)",
+            "url": "http://localhost:8083/recipe/byName/Macarroncios",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-01-15T11:08:28.599Z",
+            "modified": "2024-01-15T16:32:25.350Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "35532285-c64e-4276-a30e-93585ace022e",
+            "colId": "8fd51e08-0362-4641-a315-dc928a0c14ed",
+            "containerId": "",
+            "name": "Editar Receta",
+            "url": "http://localhost:8083/recipe",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-01-15T11:08:28.600Z",
+            "modified": "2024-01-15T16:34:49.607Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id_recipe\": 1,\n  \"id_user\": {\n    \"id_user\": 9,\n    \"username\": \"administrador\",\n    \"name\": \"Admin\",\n    \"surname\": \"Apellido\",\n    \"email\": \"mail1@mail.com\",\n    \"phone\": \"658945123\",\n    \"profile_picture\": null,\n    \"role\": false\n  },\n  \"name\": \"Macarroncios\",\n  \"description\": \"cosas cosas cosas\",\n  \"recipe_image\": null\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "6d65aa90-b9cb-4777-8282-b9a040b8b75a",
+            "colId": "8fd51e08-0362-4641-a315-dc928a0c14ed",
+            "containerId": "",
+            "name": "Eliminar Receta",
+            "url": "http://localhost:8083/recipe/2",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-01-15T11:08:28.601Z",
+            "modified": "2024-01-15T16:35:37.247Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkZTYwMmE4ZS05NWFkLTQyN2ItOTE0MS1hOGQ2NmI4YWJjYzkiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE3MDAzMDY2ODksImV4cCI6MTcwMDMwODE4OSwibmFtZSI6InVzZXJhZG1pbiJ9.tlg3_67MiIUWL5M2qdKFlAZxaQrUEswXSiqgstvmfJYv2Gi37xMvtlGqPf2_3suAHUnrc1Aum5tXr9nGutE22w"
+            },
+            "tests": []
+        }
+    ]
+}

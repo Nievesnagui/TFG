@@ -29,7 +29,7 @@ public class RecipeEntity {
 
     @NotBlank
     @NotNull
-    @Size(min = 6, max = 255)
+    @Size(min = 3, max = 255)
     private String name;
 
     @NotNull

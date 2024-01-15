@@ -28,7 +28,6 @@ public class FavRecipeService {
     }
 
     public Long create(FavRecipeEntity oFavRecipeEntity) {
-        oFavRecipeEntity.setId_fav(null);
         return oFavRecipeRepository.save(oFavRecipeEntity).getId_fav();
     }
 

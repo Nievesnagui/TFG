@@ -1,0 +1,60 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "tfg_weekly",
+    "dateExported": "2024-01-15T16:57:55.078Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "2a52b466-a304-4e2d-ba4f-a2ad7e5eadd7",
+            "colId": "50ab12cd-7a14-4736-80a1-5d44868442c5",
+            "containerId": "",
+            "name": "Crear Semanario",
+            "url": "http://localhost:8083/weekly",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-15T16:49:47.985Z",
+            "modified": "2024-01-15T16:56:21.776Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id_user\": {\n    \"id_user\": 9\n  },\n  \"init_date\": \"2024-01-15\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "bc8b2e13-7563-4c50-8a4a-4bb61496f25c",
+            "colId": "50ab12cd-7a14-4736-80a1-5d44868442c5",
+            "containerId": "",
+            "name": "Leer Semanario",
+            "url": "http://localhost:8083/weekly/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-15T16:49:47.986Z",
+            "modified": "2024-01-15T16:57:15.149Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "eb1096e2-cd96-42cf-885b-12977d3e0546",
+            "colId": "50ab12cd-7a14-4736-80a1-5d44868442c5",
+            "containerId": "",
+            "name": "Eliminar Semanario",
+            "url": "http://localhost:8083/weekly/2",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-01-15T16:49:47.989Z",
+            "modified": "2024-01-15T16:57:47.502Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkZTYwMmE4ZS05NWFkLTQyN2ItOTE0MS1hOGQ2NmI4YWJjYzkiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE3MDAzMDY2ODksImV4cCI6MTcwMDMwODE4OSwibmFtZSI6InVzZXJhZG1pbiJ9.tlg3_67MiIUWL5M2qdKFlAZxaQrUEswXSiqgstvmfJYv2Gi37xMvtlGqPf2_3suAHUnrc1Aum5tXr9nGutE22w"
+            },
+            "tests": []
+        }
+    ]
+}

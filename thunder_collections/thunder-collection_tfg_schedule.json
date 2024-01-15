@@ -1,0 +1,79 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "tfg_schedule",
+    "dateExported": "2024-01-15T17:05:05.710Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "36d744e3-b40e-4d9c-96fa-df855c1cb78c",
+            "colId": "6580236c-acd0-4110-b232-d1e6f78a3850",
+            "containerId": "",
+            "name": "Crear Horario",
+            "url": "http://localhost:8083/schedule",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-15T16:48:46.002Z",
+            "modified": "2024-01-15T17:01:05.737Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"id_weekly\":{\n  \"id_weekly\": 1\n  },\n\"id_recipe\": {\n  \"id_recipe\":1\n  },\n  \"type\": \"lunch\",\n  \"day\": \"monday\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5e2ea628-6354-42d6-abbf-ba92a815cd94",
+            "colId": "6580236c-acd0-4110-b232-d1e6f78a3850",
+            "containerId": "",
+            "name": "Leer Horario",
+            "url": "http://localhost:8083/schedule/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-15T16:48:46.003Z",
+            "modified": "2024-01-15T17:01:37.563Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5882e953-95b0-4d5d-a69a-2fd263bd0aed",
+            "colId": "6580236c-acd0-4110-b232-d1e6f78a3850",
+            "containerId": "",
+            "name": "Editar Horario",
+            "url": "http://localhost:8083/schedule",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-01-15T16:48:46.005Z",
+            "modified": "2024-01-15T17:03:28.178Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id_schedule\": 1,\n  \"id_weekly\": {\n    \"id_weekly\": 1\n  },\n  \"id_recipe\": {\n    \"id_recipe\": 1\n  },\n  \"type\": \"dinner\",\n  \"day\": \"monday\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "06e4d529-43b1-4c61-ac88-3eec29c0082e",
+            "colId": "6580236c-acd0-4110-b232-d1e6f78a3850",
+            "containerId": "",
+            "name": "Eliminar Horario",
+            "url": "http://localhost:8083/schedule/2",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-01-15T16:48:46.006Z",
+            "modified": "2024-01-15T17:05:00.297Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkZTYwMmE4ZS05NWFkLTQyN2ItOTE0MS1hOGQ2NmI4YWJjYzkiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE3MDAzMDY2ODksImV4cCI6MTcwMDMwODE4OSwibmFtZSI6InVzZXJhZG1pbiJ9.tlg3_67MiIUWL5M2qdKFlAZxaQrUEswXSiqgstvmfJYv2Gi37xMvtlGqPf2_3suAHUnrc1Aum5tXr9nGutE22w"
+            },
+            "tests": []
+        }
+    ]
+}

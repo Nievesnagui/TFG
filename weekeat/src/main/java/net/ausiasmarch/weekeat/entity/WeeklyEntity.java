@@ -1,6 +1,6 @@
 package net.ausiasmarch.weekeat.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +26,11 @@ public class WeeklyEntity {
     @JoinColumn(name = "id_user")
     private UserEntity id_user;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private LocalDateTime init_date;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate init_date;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private LocalDateTime end_date;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate end_date;
 
     @OneToMany(mappedBy = "id_weekly", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ScheduleEntity> schedules;
@@ -39,24 +39,24 @@ public class WeeklyEntity {
         schedules = new ArrayList<>();
     }
 
-    public WeeklyEntity(UserEntity id_user, LocalDateTime init_date) {
+    public WeeklyEntity(UserEntity id_user, LocalDate init_date) {
         this.id_user = id_user;
         this.init_date = init_date;
     }
 
-    public WeeklyEntity(Long id_weekly, UserEntity id_user, LocalDateTime init_date) {
+    public WeeklyEntity(Long id_weekly, UserEntity id_user, LocalDate init_date) {
         this.id_weekly = id_weekly;
         this.id_user = id_user;
         this.init_date = init_date;
     }
 
-    public WeeklyEntity(UserEntity id_user, LocalDateTime init_date, LocalDateTime end_date) {
+    public WeeklyEntity(UserEntity id_user, LocalDate init_date, LocalDate end_date) {
         this.id_user = id_user;
         this.init_date = init_date;
         this.end_date = end_date;
     }
 
-    public WeeklyEntity(Long id_weekly, UserEntity id_user, LocalDateTime init_date, LocalDateTime end_date) {
+    public WeeklyEntity(Long id_weekly, UserEntity id_user, LocalDate init_date, LocalDate end_date) {
         this.id_weekly = id_weekly;
         this.id_user = id_user;
         this.init_date = init_date;
@@ -79,19 +79,19 @@ public class WeeklyEntity {
         this.id_user = id_user;
     }
 
-    public LocalDateTime getInit_date() {
+    public LocalDate getInit_date() {
         return init_date;
     }
 
-    public void setInit_date(LocalDateTime init_date) {
+    public void setInit_date(LocalDate init_date) {
         this.init_date = init_date;
     }
 
-    public LocalDateTime getEnd_date() {
+    public LocalDate getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(LocalDateTime end_date) {
+    public void setEnd_date(LocalDate end_date) {
         this.end_date = end_date;
     }
 

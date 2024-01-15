@@ -1,0 +1,60 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "tfg_content",
+    "dateExported": "2024-01-15T16:48:09.431Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "52c3b9b3-f8cf-4172-ae09-2024fe67bfd8",
+            "colId": "08e5601a-f8d5-4ead-aad6-6bc44c3aeed6",
+            "containerId": "",
+            "name": "Crear Contenido",
+            "url": "http://localhost:8083/content",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-15T16:37:41.189Z",
+            "modified": "2024-01-15T16:42:05.961Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n\"id_ingredient\":{\n  \"id_ingredient\": 1\n  },\n\"id_recipe\": {\n  \"id_recipe\":1\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "6a2df59a-6398-4381-ab28-dea019909857",
+            "colId": "08e5601a-f8d5-4ead-aad6-6bc44c3aeed6",
+            "containerId": "",
+            "name": "Leer Contenido",
+            "url": "http://localhost:8083/content/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-15T16:37:41.190Z",
+            "modified": "2024-01-15T16:42:22.701Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0de77b57-09af-4f86-bffb-ef9e98f1cea4",
+            "colId": "08e5601a-f8d5-4ead-aad6-6bc44c3aeed6",
+            "containerId": "",
+            "name": "Eliminar Usuario",
+            "url": "http://localhost:8083/content/2",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-01-15T16:37:41.193Z",
+            "modified": "2024-01-15T16:44:34.752Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkZTYwMmE4ZS05NWFkLTQyN2ItOTE0MS1hOGQ2NmI4YWJjYzkiLCJpc3MiOiJQSE9TUEhPUlVNIERBVyBBVVNJQVMgTUFSQ0giLCJpYXQiOjE3MDAzMDY2ODksImV4cCI6MTcwMDMwODE4OSwibmFtZSI6InVzZXJhZG1pbiJ9.tlg3_67MiIUWL5M2qdKFlAZxaQrUEswXSiqgstvmfJYv2Gi37xMvtlGqPf2_3suAHUnrc1Aum5tXr9nGutE22w"
+            },
+            "tests": []
+        }
+    ]
+}

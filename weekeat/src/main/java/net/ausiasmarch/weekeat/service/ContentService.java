@@ -27,7 +27,6 @@ public class ContentService {
     }
 
     public Long create(ContentEntity oContentEntity) {
-        oContentEntity.setId_content(null);
         return oContentRepository.save(oContentEntity).getId_content();
     }
 

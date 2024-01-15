@@ -65,6 +65,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<WeeklyEntity> weeks;
 
+    @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<RecipeEntity> recipes;
+
     public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,
             @NotNull @NotBlank @Size(min = 6, max = 256) @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal") String password) {
         this.username = username;
@@ -104,6 +107,7 @@ public class UserEntity {
     public UserEntity() {
         favs = new ArrayList<>();
         weeks = new ArrayList<>();
+        recipes = new ArrayList<>();
     }
 
     public UserEntity(@NotBlank @NotNull @Size(min = 6, max = 255) String username,

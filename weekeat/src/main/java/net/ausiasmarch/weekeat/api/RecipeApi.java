@@ -24,7 +24,7 @@ import net.ausiasmarch.weekeat.service.RecipeService;
 public class RecipeApi {
     @Autowired
     RecipeService oRecipeService;
-    
+
     @GetMapping("/{id_recipe}")
     public ResponseEntity<RecipeEntity> get(@PathVariable("id_recipe") Long id_recipe) {
         return ResponseEntity.ok(oRecipeService.get(id_recipe));
@@ -50,8 +50,10 @@ public class RecipeApi {
     public ResponseEntity<Page<RecipeEntity>> getPage(Pageable oPageable) {
         return ResponseEntity.ok(oRecipeService.getPage(oPageable));
     }
-    
 
-
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<RecipeEntity> get(@PathVariable("name") String name) {
+        return ResponseEntity.ok(oRecipeService.getByName(name));
+    }
 
 }

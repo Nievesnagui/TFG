@@ -33,7 +33,6 @@ public class RecipeService {
     }
 
     public Long create(RecipeEntity oRecipeEntity) {
-        oRecipeEntity.setId_user(null);
         return oRecipeRepository.save(oRecipeEntity).getId_recipe();
     }
 
