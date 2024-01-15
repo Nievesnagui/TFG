@@ -1,5 +1,6 @@
 package net.ausiasmarch.weekeat.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -9,10 +10,14 @@ import jakarta.transaction.Transactional;
 import net.ausiasmarch.weekeat.entity.TypeEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
 import net.ausiasmarch.weekeat.repository.TypeRepository;
+import net.ausiasmarch.weekeat.repository.UserRepository;
 
 @Service
 public class TypeService {
     
+     @Autowired
+    UserRepository oUserRepository;
+
     @Autowired
     TypeRepository oTypeRepository;
 
@@ -57,6 +62,6 @@ public class TypeService {
         oTypeRepository.deleteAll();
         return oTypeRepository.count();
     }
-    
-    
+
+   
 }

@@ -1,8 +1,9 @@
 package net.ausiasmarch.weekeat.bean;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ErrorResponseBean {
+
     private Date timestamp;
     private String status;
     private String message;

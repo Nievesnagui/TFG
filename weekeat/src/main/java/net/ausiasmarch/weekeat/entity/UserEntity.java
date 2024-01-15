@@ -54,10 +54,14 @@ public class UserEntity {
     @NotBlank
     @Size(min = 6, max = 256)
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal")
-    private String password = "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e";
+    private String password = "c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261";
 
     @Lob
     private byte[] profile_picture;
+
+    private boolean verified;
+
+    private String token;
 
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
@@ -199,4 +203,20 @@ public class UserEntity {
         this.profile_picture = profile_picture;
     }
 
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
 }
