@@ -118,4 +118,36 @@ public class RecipeEntity {
         this.recipe_image = recipe_image;
     }
 
+    public List<ContentEntity> getContent() {
+        return content;
+    }
+
+    public void setContent(List<ContentEntity> content) {
+        this.content = content;
+    }
+
+    public int getContent_count() {
+        return content.size();
+    }
+
+    public List<FavRecipeEntity> getFavs() {
+        return favs;
+    }
+
+    public void setFavs(List<FavRecipeEntity> favs) {
+        this.favs = favs;
+    }
+
+    public List<ScheduleEntity> getSchedulesList() {
+        return schedules;
+    }
+
+    public void setSchedulesList(List<ScheduleEntity> schedules) {
+        this.schedules = schedules;
+    }
+
+    public int getSchedules() {
+        return schedules.size();
+    }
+
 }

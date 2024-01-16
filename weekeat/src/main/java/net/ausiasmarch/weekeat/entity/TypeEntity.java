@@ -61,5 +61,12 @@ public class TypeEntity {
         return ingredients.size();
     }
 
+    public List<IngredientEntity> getIngredientsList() {
+        return ingredients;
+    }
+
+    public void setIngredientsList(List<IngredientEntity> ingredients) {
+        this.ingredients = ingredients;
+    }
 
 }

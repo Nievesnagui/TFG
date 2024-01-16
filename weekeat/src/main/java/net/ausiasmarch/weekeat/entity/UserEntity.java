@@ -59,9 +59,9 @@ public class UserEntity {
     @Lob
     private byte[] profile_picture;
 
-    private boolean verified;
+    //private boolean verified;
 
-    private String token;
+    //private String token;
 
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
@@ -203,7 +203,43 @@ public class UserEntity {
         this.profile_picture = profile_picture;
     }
 
-    public boolean isVerified() {
+    public List<FavRecipeEntity> getFavsList() {
+        return favs;
+    }
+
+    public void setFavsList(List<FavRecipeEntity> favs) {
+        this.favs = favs;
+    }
+
+    public List<WeeklyEntity> getWeeksList() {
+        return weeks;
+    }
+
+    public void setWeeksList(List<WeeklyEntity> weeks) {
+        this.weeks = weeks;
+    }
+
+    public List<RecipeEntity> getRecipesList() {
+        return recipes;
+    }
+
+    public void setRecipes(List<RecipeEntity> recipes) {
+        this.recipes = recipes;
+    }
+
+    public int getWeeks() {
+        return weeks.size();
+    }
+
+    public int getFavs() {
+        return favs.size();
+    }
+
+    public int getRecipes() {
+        return recipes.size();
+    }
+
+    /* public boolean isVerified() {
         return verified;
     }
 
@@ -217,6 +253,6 @@ public class UserEntity {
 
     public void setToken(String token) {
         this.token = token;
-    }
+    }*/
     
 }

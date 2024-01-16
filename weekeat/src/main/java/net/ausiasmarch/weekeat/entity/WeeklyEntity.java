@@ -95,5 +95,16 @@ public class WeeklyEntity {
         this.end_date = end_date;
     }
 
+    public List<ScheduleEntity> getSchedulesList() {
+        return schedules;
+    }
+
+    public void setSchedulesList(List<ScheduleEntity> schedules) {
+        this.schedules = schedules;
+    }
+
+    public int getSchedules() {
+        return schedules.size();
+    }
     
 }

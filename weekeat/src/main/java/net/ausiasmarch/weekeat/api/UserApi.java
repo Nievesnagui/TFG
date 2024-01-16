@@ -20,6 +20,7 @@ import net.ausiasmarch.weekeat.service.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserApi {
+    
     @Autowired
     UserService oUserService;
 

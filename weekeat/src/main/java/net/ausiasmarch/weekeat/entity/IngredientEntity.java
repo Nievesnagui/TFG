@@ -94,4 +94,16 @@ public class IngredientEntity {
         this.ingredient_image = ingredient_image;
     }
 
+    public List<ContentEntity> getContentList() {
+        return content;
+    }
+
+    public void setContentList(List<ContentEntity> content) {
+        this.content = content;
+    }
+
+    public int getContent() {
+        return content.size();
+    }
+
 }
