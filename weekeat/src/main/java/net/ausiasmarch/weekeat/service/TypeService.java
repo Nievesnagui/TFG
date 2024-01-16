@@ -42,10 +42,12 @@ public class TypeService {
     }
 
     public Long create(TypeEntity oTypeEntity) {
+        oSessionService.onlyAdmins();
         return oTypeRepository.save(oTypeEntity).getId_type();
     }
 
     public TypeEntity update(TypeEntity oTypeEntity) {
+        oSessionService.onlyAdmins();
         TypeEntity oTypeEntity2 = oTypeRepository.findById(oTypeEntity.getId_type())
               .orElseThrow(() -> new ResourceNotFoundException("Type not found"));
         oTypeEntity2.setName(oTypeEntity.getName());
@@ -53,12 +55,14 @@ public class TypeService {
     }
 
     public Long delete(Long id_type) {
+        oSessionService.onlyAdmins();
         oTypeRepository.deleteById(id_type);
         return id_type;
     }
 
     @Transactional
     public Long empty() {
+        oSessionService.onlyAdmins();
         oTypeRepository.deleteAll();
         return oTypeRepository.count();
     }

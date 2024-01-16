@@ -38,6 +38,7 @@ public class UserService {
     }
 
     public Long create(UserEntity oUserEntity) {
+        oSessionService.onlyAdmins();
         oUserEntity.setId_user(null);
         oUserEntity.setPassword(genericPasswd);
         return oUserRepository.save(oUserEntity).getId_user();
@@ -57,14 +58,16 @@ public class UserService {
     }
 
     public Long delete(Long id) {
+        oSessionService.onlyAdmins();
         oUserRepository.deleteById(id);
         return id;
     }
 
     @Transactional
     public Long empty() {
+        oSessionService.onlyAdmins();
         oUserRepository.deleteAll();
-        // oUserRepository.resetAutoIncrement();
+        oUserRepository.resetAutoIncrement();
         UserEntity oUserEntity1 = new UserEntity("administrador", "Admin", "Apellido", "mail1@mail.com",
                 "658945123", "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e",
                 false);
