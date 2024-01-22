@@ -2,7 +2,6 @@ package net.ausiasmarch.weekeat.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,6 +38,7 @@ public class RecipeEntity {
     @Lob
     private byte[] recipe_image;
 
+    
     @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ContentEntity> content;
     

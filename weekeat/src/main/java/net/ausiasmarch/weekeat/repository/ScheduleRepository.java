@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import net.ausiasmarch.weekeat.entity.ScheduleEntity;
 
 public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> {
-     @Modifying
+    @Modifying
     @Query(value = "ALTER TABLE schedule AUTO_INCREMENT = 1", nativeQuery = true)
     void resetAutoIncrement();
 }
