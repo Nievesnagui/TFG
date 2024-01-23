@@ -24,7 +24,7 @@ public class WeeklyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_weekly;
 
-    @JsonBackReference
+    @JsonBackReference("user-weekly")
     @ManyToOne
     @JoinColumn(name = "id_user")
     private UserEntity id_user;
@@ -36,7 +36,7 @@ public class WeeklyEntity {
     private LocalDate end_date;
 
 
-    @JsonManagedReference
+    @JsonManagedReference("weekly-schedule")
     @OneToMany(mappedBy = "id_weekly", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ScheduleEntity> schedules;
     

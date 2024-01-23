@@ -17,12 +17,12 @@ public class ContentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_content;
 
-    @JsonBackReference
+    @JsonBackReference("ingredient-content")
     @ManyToOne
     @JoinColumn(name = "id_ingredient")
     private IngredientEntity id_ingredient;
 
-    @JsonBackReference
+    @JsonBackReference("recipe-content")
     @ManyToOne
     @JoinColumn(name = "id_recipe")
     private RecipeEntity id_recipe;

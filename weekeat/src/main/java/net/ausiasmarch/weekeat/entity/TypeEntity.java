@@ -28,7 +28,7 @@ public class TypeEntity {
     private String name;
 
 
-    @JsonManagedReference
+    @JsonManagedReference("type-ingredient")
     @OneToMany(mappedBy = "id_type", fetch = jakarta.persistence.FetchType.LAZY)
     private List<IngredientEntity> ingredients;
 

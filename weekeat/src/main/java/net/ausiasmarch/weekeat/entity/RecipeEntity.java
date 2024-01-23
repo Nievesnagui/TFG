@@ -26,7 +26,7 @@ public class RecipeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_recipe;
 
-    @JsonBackReference
+    @JsonBackReference("user-recipe")
     @ManyToOne
     @JoinColumn(name = "id_user")
     private UserEntity id_user;
@@ -44,17 +44,17 @@ public class RecipeEntity {
     private byte[] recipe_image;
 
     
-    @JsonManagedReference
+    @JsonManagedReference("recipe-content")
     @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ContentEntity> content;
     
 
-    @JsonManagedReference
+    @JsonManagedReference("recipe-favourite")
     @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
 
 
-    @JsonManagedReference
+    @JsonManagedReference("recipe-schedule")
     @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ScheduleEntity> schedules;
 

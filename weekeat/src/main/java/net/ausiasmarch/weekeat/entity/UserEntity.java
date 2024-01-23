@@ -65,17 +65,17 @@ public class UserEntity {
     //private String token;
 
 
-    @JsonManagedReference
+    @JsonManagedReference("user-favourite")
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
 
 
-    @JsonManagedReference
+    @JsonManagedReference("user-weekly")
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<WeeklyEntity> weeks;
 
 
-    @JsonManagedReference
+    @JsonManagedReference("user-recipe")
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<RecipeEntity> recipes;
 

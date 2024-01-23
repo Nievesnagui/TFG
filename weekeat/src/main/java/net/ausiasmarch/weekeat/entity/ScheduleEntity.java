@@ -21,12 +21,12 @@ public class ScheduleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_schedule;
     
-    @JsonBackReference
+    @JsonBackReference("weekly-schedule")
     @ManyToOne
     @JoinColumn(name = "id_weekly")
     private WeeklyEntity id_weekly;
 
-    @JsonBackReference
+    @JsonBackReference("recipe-schedule")
     @ManyToOne
     @JoinColumn(name = "id_recipe")
     private RecipeEntity id_recipe;

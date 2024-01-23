@@ -17,12 +17,12 @@ public class FavRecipeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_fav;
 
-    @JsonBackReference
+    @JsonBackReference("user-favourite")
     @ManyToOne
     @JoinColumn(name = "id_user")
     private UserEntity id_user;
 
-    @JsonBackReference
+    @JsonBackReference("recipe-favourite")
     @ManyToOne
     @JoinColumn(name = "id_recipe")
     private RecipeEntity id_recipe;

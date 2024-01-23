@@ -26,7 +26,7 @@ public class IngredientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_ingredient;
 
-    @JsonBackReference
+    @JsonBackReference("type-ingredient")
     @ManyToOne
     @JoinColumn(name = "id_type")
     private TypeEntity id_type;
@@ -40,7 +40,7 @@ public class IngredientEntity {
     private byte[] ingredient_image;
 
 
-    @JsonManagedReference
+    @JsonManagedReference("ingredient-content")
     @OneToMany(mappedBy = "id_ingredient", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ContentEntity> content;
 
