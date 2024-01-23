@@ -3,6 +3,9 @@ package net.ausiasmarch.weekeat.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +26,7 @@ public class IngredientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_ingredient;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_type")
     private TypeEntity id_type;
@@ -35,6 +39,8 @@ public class IngredientEntity {
     @Lob
     private byte[] ingredient_image;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_ingredient", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ContentEntity> content;
 

@@ -3,6 +3,7 @@ package net.ausiasmarch.weekeat.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
@@ -63,12 +64,18 @@ public class UserEntity {
 
     //private String token;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<WeeklyEntity> weeks;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<RecipeEntity> recipes;
 

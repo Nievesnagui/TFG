@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ public class WeeklyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_weekly;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_user")
     private UserEntity id_user;
@@ -32,6 +35,8 @@ public class WeeklyEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate end_date;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_weekly", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ScheduleEntity> schedules;
     

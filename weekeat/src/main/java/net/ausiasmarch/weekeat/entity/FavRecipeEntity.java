@@ -1,5 +1,7 @@
 package net.ausiasmarch.weekeat.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,10 +17,12 @@ public class FavRecipeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_fav;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_user")
     private UserEntity id_user;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_recipe")
     private RecipeEntity id_recipe;

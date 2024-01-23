@@ -3,6 +3,8 @@ package net.ausiasmarch.weekeat.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +27,8 @@ public class TypeEntity {
     @Size(min = 2, max = 255)
     private String name;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_type", fetch = jakarta.persistence.FetchType.LAZY)
     private List<IngredientEntity> ingredients;
 

@@ -2,6 +2,10 @@ package net.ausiasmarch.weekeat.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +26,7 @@ public class RecipeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_recipe;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_user")
     private UserEntity id_user;
@@ -39,12 +44,17 @@ public class RecipeEntity {
     private byte[] recipe_image;
 
     
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ContentEntity> content;
     
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<FavRecipeEntity> favs;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ScheduleEntity> schedules;
 

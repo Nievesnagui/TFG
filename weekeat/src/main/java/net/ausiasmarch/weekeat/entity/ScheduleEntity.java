@@ -1,5 +1,7 @@
 package net.ausiasmarch.weekeat.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,10 +21,12 @@ public class ScheduleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_schedule;
     
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_weekly")
     private WeeklyEntity id_weekly;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_recipe")
     private RecipeEntity id_recipe;
