@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: database:3306
--- Tiempo de generación: 25-01-2024 a las 16:44:35
+-- Tiempo de generación: 13-01-2024 a las 12:46:21
 -- Versión del servidor: 10.9.8-MariaDB-1:10.9.8+maria~ubu2204
 -- Versión de PHP: 8.2.14
 
@@ -33,13 +33,6 @@ CREATE TABLE `content` (
   `id_recipe` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `content`
---
-
-INSERT INTO `content` (`id_content`, `id_ingredient`, `id_recipe`) VALUES
-(1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -52,13 +45,6 @@ CREATE TABLE `fav_recipe` (
   `id_recipe` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `fav_recipe`
---
-
-INSERT INTO `fav_recipe` (`id_fav`, `id_user`, `id_recipe`) VALUES
-(1, 9, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -69,16 +55,8 @@ CREATE TABLE `ingredient` (
   `id_ingredient` bigint(11) NOT NULL,
   `id_type` bigint(20) NOT NULL,
   `name` varchar(55) NOT NULL,
-  `ingredient_image` blob DEFAULT NULL
+  `ingredient_image` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `ingredient`
---
-
-INSERT INTO `ingredient` (`id_ingredient`, `id_type`, `name`, `ingredient_image`) VALUES
-(1, 1, 'yogurt prueba', NULL),
-(2, 2, 'prueba', NULL);
 
 -- --------------------------------------------------------
 
@@ -88,21 +66,11 @@ INSERT INTO `ingredient` (`id_ingredient`, `id_type`, `name`, `ingredient_image`
 
 CREATE TABLE `recipe` (
   `id_recipe` bigint(11) NOT NULL,
-  `id_user` bigint(11) NOT NULL,
+  `id_creator` bigint(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` longtext NOT NULL,
   `recipe_image` blob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `recipe`
---
-
-INSERT INTO `recipe` (`id_recipe`, `id_user`, `name`, `description`, `recipe_image`) VALUES
-(1, 9, 'Macarroncios', 'cosas cosas cosas', NULL),
-(3, 9, 'madalena', 'fsfdsfsf', NULL),
-(4, 9, 'madalena', 'fsfdsfsf', NULL),
-(5, 9, 'Para borrar', 'instrucciones', NULL);
 
 -- --------------------------------------------------------
 
@@ -118,14 +86,6 @@ CREATE TABLE `schedule` (
   `day` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `schedule`
---
-
-INSERT INTO `schedule` (`id_schedule`, `id_recipe`, `id_weekly`, `type`, `day`) VALUES
-(1, 1, 1, 'dinner', 'monday'),
-(3, 1, 1, 'lunch', 'monday');
-
 -- --------------------------------------------------------
 
 --
@@ -137,14 +97,6 @@ CREATE TABLE `type` (
   `name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `type`
---
-
-INSERT INTO `type` (`id_type`, `name`) VALUES
-(1, 'dairy'),
-(2, 'fish');
-
 -- --------------------------------------------------------
 
 --
@@ -152,13 +104,13 @@ INSERT INTO `type` (`id_type`, `name`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` bigint(11) NOT NULL,
+  `id_user` bigint(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `email` varchar(150) NOT NULL,
   `phone` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(20) NOT NULL,
   `profile_picture` blob DEFAULT NULL,
   `role` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -167,11 +119,9 @@ CREATE TABLE `user` (
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `name`, `surname`, `email`, `phone`, `password`, `profile_picture`, `role`) VALUES
-(9, 'administrador', 'Admin', 'Apellido', 'mail1@mail.com', '658945123', '75358e7d1d70df676d847e711d0c2e2d052660a1fad21050c491ba77d67b65ef', NULL, 0),
-(10, 'usuario', 'Admin', 'Apellido', 'mail2@mail.com', '658945123', 'e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e', NULL, 0),
-(12, 'prueba3', 'Pepeto', 'Prueba', 'correo3@mail.com', '654987412', 'c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261', NULL, 1),
-(15, 'prueba6', 'Prueba', 'Prueba', 'correo6@mail.com', '654987412', 'c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261', NULL, 1);
+INSERT INTO `user` (`id_user`, `username`, `name`, `surname`, `email`, `phone`, `password`, `profile_picture`, `role`) VALUES
+(1, 'useradmin', 'Admin', 'Admin', 'admin@user.es', '654123654', '123456789', '', 0),
+(2, 'useruser', 'User', 'User', 'user@user.es', '654123654', '123456789', '', 1);
 
 -- --------------------------------------------------------
 
@@ -185,14 +135,6 @@ CREATE TABLE `weekly` (
   `init_date` date NOT NULL,
   `end_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `weekly`
---
-
-INSERT INTO `weekly` (`id_weekly`, `id_user`, `init_date`, `end_date`) VALUES
-(1, 9, '2024-01-15', NULL),
-(3, 10, '2024-01-15', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -238,7 +180,7 @@ ALTER TABLE `type`
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
@@ -256,49 +198,49 @@ ALTER TABLE `weekly`
 -- AUTO_INCREMENT de la tabla `content`
 --
 ALTER TABLE `content`
-  MODIFY `id_content` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_content` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `fav_recipe`
 --
 ALTER TABLE `fav_recipe`
-  MODIFY `id_fav` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_fav` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredient`
 --
 ALTER TABLE `ingredient`
-  MODIFY `id_ingredient` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_ingredient` bigint(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `recipe`
 --
 ALTER TABLE `recipe`
-  MODIFY `id_recipe` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_recipe` bigint(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id_schedule` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_schedule` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `type`
 --
 ALTER TABLE `type`
-  MODIFY `id_type` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_type` bigint(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_user` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `weekly`
 --
 ALTER TABLE `weekly`
-  MODIFY `id_weekly` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_weekly` bigint(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

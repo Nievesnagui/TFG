@@ -16,7 +16,7 @@ import org.springframework.data.domain.Pageable;
 import net.ausiasmarch.weekeat.entity.ScheduleEntity;
 import net.ausiasmarch.weekeat.service.ScheduleService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/schedule")
 public class ScheduleApi {

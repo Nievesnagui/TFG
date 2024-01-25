@@ -24,7 +24,7 @@ import jakarta.validation.constraints.Size;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    private Long id;
 
     @NotBlank
     @NotNull
@@ -101,12 +101,12 @@ public class UserEntity {
         this.role = role;
     }
 
-    public UserEntity(Long id_user, @NotBlank @NotNull @Size(min = 6, max = 255) String username,
+    public UserEntity(Long id, @NotBlank @NotNull @Size(min = 6, max = 255) String username,
             @NotBlank @NotNull @Size(min = 3, max = 255) String name,
             @NotBlank @NotNull @Size(min = 3, max = 255) String surname, @Email String email,
             @NotNull @NotBlank @Size(min = 8, max = 20) @Pattern(regexp = "^[0-9]+$", message = "Phone number must be decimal") String phone,
             @NotNull @NotBlank @Size(min = 6, max = 256) @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal") String password) {
-        this.id_user = id_user;
+        this.id = id;
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -138,12 +138,12 @@ public class UserEntity {
 
     private Boolean role = false;
 
-    public Long getId_user() {
-        return id_user;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_user(Long id_user) {
-        this.id_user = id_user;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {

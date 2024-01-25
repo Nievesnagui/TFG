@@ -17,7 +17,7 @@ import org.springframework.data.domain.Pageable;
 import net.ausiasmarch.weekeat.entity.IngredientEntity;
 import net.ausiasmarch.weekeat.service.IngredientService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/ingredient")
 public class IngredientApi {

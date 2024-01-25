@@ -98,22 +98,22 @@ public class SessionService {
         }
     }
 
-    public void onlyUsersWithIisOwnData(Long id_user) {
+    public void onlyUsersWithIisOwnData(Long id) {
         if (!this.isUser()) {
             throw new UnauthorizedException("Only users can do this");
         }
-        if (!this.getSessionUser().getId_user().equals(id_user)) {
+        if (!this.getSessionUser().getId().equals(id)) {
             throw new UnauthorizedException("Only users can do this");
         }
     }
 
-    public void onlyAdminsOrUsersWithIisOwnData(Long id_user) {
+    public void onlyAdminsOrUsersWithIisOwnData(Long id) {
         if (this.isSessionActive()) {
             if (!this.isAdmin()) {
                 if (!this.isUser()) {
                     throw new UnauthorizedException("Only admins or users can do this");
                 } else {
-                    if (!this.getSessionUser().getId_user().equals(id_user)) {
+                    if (!this.getSessionUser().getId().equals(id)) {
                         throw new UnauthorizedException("Only admins or users with its own data can do this");
                     }
                 }

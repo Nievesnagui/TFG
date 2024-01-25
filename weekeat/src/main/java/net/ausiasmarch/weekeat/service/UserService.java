@@ -1,6 +1,8 @@
 package net.ausiasmarch.weekeat.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,8 +29,8 @@ public class UserService {
      */
     private final String genericPasswd = "c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261";
 
-    public UserEntity get(Long id_user) {
-        return oUserRepository.findById(id_user)
+    public UserEntity get(Long id) {
+        return oUserRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
@@ -37,15 +39,19 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found by username"));
     }
 
+   public Page<UserEntity> getPage(Pageable oPageable) {
+        return oUserRepository.findAll(oPageable);
+    }
+
     public Long create(UserEntity oUserEntity) {
         oSessionService.onlyAdmins();
-        oUserEntity.setId_user(null);
+        oUserEntity.setId(null);
         oUserEntity.setPassword(genericPasswd);
-        return oUserRepository.save(oUserEntity).getId_user();
+        return oUserRepository.save(oUserEntity).getId();
     }
 
     public UserEntity update(UserEntity oUserEntity) {
-        UserEntity oUserEntityAux = oUserRepository.findById(oUserEntity.getId_user())
+        UserEntity oUserEntityAux = oUserRepository.findById(oUserEntity.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         oUserEntityAux.setName(oUserEntity.getName());
         oUserEntityAux.setSurname(oUserEntity.getSurname());

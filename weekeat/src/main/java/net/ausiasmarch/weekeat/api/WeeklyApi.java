@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 import net.ausiasmarch.weekeat.entity.WeeklyEntity;
 import net.ausiasmarch.weekeat.service.WeeklyService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/weekly")
 public class WeeklyApi {

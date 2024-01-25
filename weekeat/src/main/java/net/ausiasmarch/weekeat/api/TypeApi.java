@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 import net.ausiasmarch.weekeat.entity.TypeEntity;
 import net.ausiasmarch.weekeat.service.TypeService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/type")
 public class TypeApi {

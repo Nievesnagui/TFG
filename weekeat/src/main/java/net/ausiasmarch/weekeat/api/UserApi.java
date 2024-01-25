@@ -1,6 +1,8 @@
 package net.ausiasmarch.weekeat.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +18,7 @@ import jakarta.validation.Valid;
 import net.ausiasmarch.weekeat.entity.UserEntity;
 import net.ausiasmarch.weekeat.service.UserService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 public class UserApi {
@@ -24,9 +26,9 @@ public class UserApi {
     @Autowired
     UserService oUserService;
 
-    @GetMapping("/{id_user}")
-    public ResponseEntity<UserEntity> get(@PathVariable("id_user") Long id_user) {
-        return ResponseEntity.ok(oUserService.get(id_user));
+    @GetMapping("/{id}")
+    public ResponseEntity<UserEntity> get(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oUserService.get(id));
     }
 
     @PostMapping("")
@@ -40,9 +42,9 @@ public class UserApi {
 
     }
 
-    @DeleteMapping("/{id_user}")
-    public ResponseEntity<Long> delete(@PathVariable("id_user") Long id_user) {
-        return ResponseEntity.ok(oUserService.delete(id_user));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oUserService.delete(id));
     }
 
     @DeleteMapping("/empty")
@@ -53,6 +55,11 @@ public class UserApi {
     @GetMapping("/byUsername/{username}")
     public ResponseEntity<UserEntity> get(@PathVariable("username") String username) {
         return ResponseEntity.ok(oUserService.getByUsername(username));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Page<UserEntity>> getPage(Pageable oPageable) {
+        return ResponseEntity.ok(oUserService.getPage(oPageable));
     }
 
 }
