@@ -25,9 +25,9 @@ public class RecipeApi {
     @Autowired
     RecipeService oRecipeService;
 
-    @GetMapping("/{id_recipe}")
-    public ResponseEntity<RecipeEntity> get(@PathVariable("id_recipe") Long id_recipe) {
-        return ResponseEntity.ok(oRecipeService.get(id_recipe));
+    @GetMapping("/{id}")
+    public ResponseEntity<RecipeEntity> get(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oRecipeService.get(id));
     }
 
     @PostMapping("")
@@ -41,9 +41,9 @@ public class RecipeApi {
 
     }
 
-    @DeleteMapping("/{id_recipe}")
-    public ResponseEntity<Long> delete(@PathVariable("id_recipe") Long id_recipe) {
-        return ResponseEntity.ok(oRecipeService.delete(id_recipe));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oRecipeService.delete(id));
     }
 
     @GetMapping("")

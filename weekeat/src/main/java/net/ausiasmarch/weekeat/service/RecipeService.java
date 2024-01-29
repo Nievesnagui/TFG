@@ -22,8 +22,8 @@ public class RecipeService {
     @Autowired
     SessionService oSessionService;
 
-    public RecipeEntity get(Long id_recipe) {
-        return oRecipeRepository.findById(id_recipe)
+    public RecipeEntity get(Long id) {
+        return oRecipeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
     }
 
@@ -33,11 +33,11 @@ public class RecipeService {
     }
 
     public Long create(RecipeEntity oRecipeEntity) {
-        return oRecipeRepository.save(oRecipeEntity).getId_recipe();
+        return oRecipeRepository.save(oRecipeEntity).getId();
     }
 
     public RecipeEntity update(RecipeEntity oRecipeEntity) {
-        RecipeEntity oRecipeEntity2 = oRecipeRepository.findById(oRecipeEntity.getId_recipe())
+        RecipeEntity oRecipeEntity2 = oRecipeRepository.findById(oRecipeEntity.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
         oRecipeEntity2.setName(oRecipeEntity.getName());
         oRecipeEntity2.setDescription(oRecipeEntity.getDescription());
@@ -50,9 +50,9 @@ public class RecipeService {
         return oRecipeRepository.findAll(oPageable);
     }
 
-    public Long delete(Long id_recipe) {
-        oRecipeRepository.deleteById(id_recipe);
-        return id_recipe;
+    public Long delete(Long id) {
+        oRecipeRepository.deleteById(id);
+        return id;
     }
 
     @Transactional

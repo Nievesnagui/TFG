@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 public class TypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_type;
+    private Long id;
 
     @NotBlank
     @NotNull
@@ -40,17 +40,17 @@ public class TypeEntity {
         this.name = name;
     }
 
-    public TypeEntity(Long id_type, @NotBlank @NotNull @Size(min = 6, max = 255) String name) {
-        this.id_type = id_type;
+    public TypeEntity(Long id, @NotBlank @NotNull @Size(min = 6, max = 255) String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public Long getId_type() {
-        return id_type;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_type(Long id_type) {
-        this.id_type = id_type;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

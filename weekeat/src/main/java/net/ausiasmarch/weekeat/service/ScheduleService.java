@@ -22,18 +22,18 @@ public class ScheduleService {
     @Autowired
     SessionService oSessionService;
 
-    public ScheduleEntity get(Long id_schedule) {
-        return oScheduleRepository.findById(id_schedule)
+    public ScheduleEntity get(Long id) {
+        return oScheduleRepository.findById(id)
           .orElseThrow(() -> new ResourceNotFoundException("Schedule not found"));
     }
 
     public Long create(ScheduleEntity oScheduleEntity) {
-        oScheduleEntity.setId_schedule(null);
-        return oScheduleRepository.save(oScheduleEntity).getId_schedule();
+        oScheduleEntity.setId(null);
+        return oScheduleRepository.save(oScheduleEntity).getId();
     }
 
     public ScheduleEntity update(ScheduleEntity oScheduleEntity) {
-        ScheduleEntity oScheduleEntity2 = oScheduleRepository.findById(oScheduleEntity.getId_schedule())
+        ScheduleEntity oScheduleEntity2 = oScheduleRepository.findById(oScheduleEntity.getId())
         .orElseThrow(() -> new ResourceNotFoundException("Schedule not found"));
           oScheduleEntity2.setId_weekly(oScheduleEntity.getId_weekly());
           oScheduleEntity2.setId_recipe(oScheduleEntity.getId_recipe());
@@ -46,9 +46,9 @@ public class ScheduleService {
         return oScheduleRepository.findAll(oPageable);
     }
 
-    public Long delete(Long id_schedule) {
-        oScheduleRepository.deleteById(id_schedule);
-        return id_schedule;
+    public Long delete(Long id) {
+        oScheduleRepository.deleteById(id);
+        return id;
     }
 
     @Transactional

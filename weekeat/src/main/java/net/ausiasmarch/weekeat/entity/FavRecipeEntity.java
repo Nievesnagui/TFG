@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 public class FavRecipeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_fav;
+    private Long id;
 
     @JsonBackReference("user-favourite")
     @ManyToOne
@@ -35,18 +35,18 @@ public class FavRecipeEntity {
         this.id_recipe = id_recipe;
     }
 
-    public FavRecipeEntity(Long id_fav, UserEntity id_user, RecipeEntity id_recipe) {
-        this.id_fav = id_fav;
+    public FavRecipeEntity(Long id, UserEntity id_user, RecipeEntity id_recipe) {
+        this.id = id;
         this.id_user = id_user;
         this.id_recipe = id_recipe;
     }
 
-    public Long getId_fav() {
-        return id_fav;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_fav(Long id_fav) {
-        this.id_fav = id_fav;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public UserEntity getId_user() {

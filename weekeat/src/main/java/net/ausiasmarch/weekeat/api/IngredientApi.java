@@ -25,9 +25,9 @@ public class IngredientApi {
     @Autowired
     IngredientService oIngredientService;
 
-    @GetMapping("/{id_ingredient}")
-    public ResponseEntity<IngredientEntity> get(@PathVariable("id_ingredient") Long id_ingredient) {
-        return ResponseEntity.ok(oIngredientService.get(id_ingredient));
+    @GetMapping("/{id}")
+    public ResponseEntity<IngredientEntity> get(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oIngredientService.get(id));
     }
 
     @PostMapping("")
@@ -41,14 +41,15 @@ public class IngredientApi {
 
     }
 
-    @DeleteMapping("/{id_ingredient}")
-    public ResponseEntity<Long> delete(@PathVariable("id_ingredient") Long id_ingredient) {
-        return ResponseEntity.ok(oIngredientService.delete(id_ingredient));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oIngredientService.delete(id));
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<IngredientEntity>> getPage(Pageable oPageable) {
-        return ResponseEntity.ok(oIngredientService.getPage(oPageable));
+    public ResponseEntity<Page<IngredientEntity>> getPage(Pageable oPageable/*,
+    @RequestParam(value = "id_type", required = false) Long id_type*/) {
+        return ResponseEntity.ok(oIngredientService.getPage(oPageable/*, id_type*/));
     }
 
     @GetMapping("/byName/{name}")

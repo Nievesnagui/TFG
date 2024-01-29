@@ -27,8 +27,8 @@ public class TypeService {
     @Autowired
     SessionService oSessionService;
 
-    public TypeEntity get(Long id_type) {
-        return oTypeRepository.findById(id_type)
+    public TypeEntity get(Long id) {
+        return oTypeRepository.findById(id)
               .orElseThrow(() -> new ResourceNotFoundException("Type not found"));
     }
 
@@ -43,21 +43,21 @@ public class TypeService {
 
     public Long create(TypeEntity oTypeEntity) {
         oSessionService.onlyAdmins();
-        return oTypeRepository.save(oTypeEntity).getId_type();
+        return oTypeRepository.save(oTypeEntity).getId();
     }
 
     public TypeEntity update(TypeEntity oTypeEntity) {
         oSessionService.onlyAdmins();
-        TypeEntity oTypeEntity2 = oTypeRepository.findById(oTypeEntity.getId_type())
+        TypeEntity oTypeEntity2 = oTypeRepository.findById(oTypeEntity.getId())
               .orElseThrow(() -> new ResourceNotFoundException("Type not found"));
         oTypeEntity2.setName(oTypeEntity.getName());
         return oTypeRepository.save(oTypeEntity2);
     }
 
-    public Long delete(Long id_type) {
+    public Long delete(Long id) {
         oSessionService.onlyAdmins();
-        oTypeRepository.deleteById(id_type);
-        return id_type;
+        oTypeRepository.deleteById(id);
+        return id;
     }
 
     @Transactional

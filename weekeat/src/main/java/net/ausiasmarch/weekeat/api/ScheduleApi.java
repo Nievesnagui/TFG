@@ -24,9 +24,9 @@ public class ScheduleApi {
     @Autowired
     ScheduleService oScheduleService;
 
-    @GetMapping("/{id_schedule}")
-    public ResponseEntity<ScheduleEntity> get(@PathVariable("id_schedule") Long id_schedule) {
-        return  ResponseEntity.ok(oScheduleService.get(id_schedule));
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleEntity> get(@PathVariable("id") Long id) {
+        return  ResponseEntity.ok(oScheduleService.get(id));
     }
 
     @PostMapping("")
@@ -39,9 +39,9 @@ public class ScheduleApi {
         return  ResponseEntity.ok(oScheduleService.update(oScheduleEntity));
     }
 
-    @DeleteMapping("/{id_schedule}")
-    public ResponseEntity<Long> delete(@PathVariable("id_schedule") Long id_schedule) {
-        return  ResponseEntity.ok(oScheduleService.delete(id_schedule));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return  ResponseEntity.ok(oScheduleService.delete(id));
     }
 
     @GetMapping("")

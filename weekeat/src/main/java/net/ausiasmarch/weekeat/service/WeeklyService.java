@@ -22,18 +22,18 @@ public class WeeklyService {
     @Autowired
     SessionService oSessionService;
 
-    public WeeklyEntity get(Long id_weekly) {
-        return oWeeklyRepository.findById(id_weekly)
+    public WeeklyEntity get(Long id) {
+        return oWeeklyRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Weekly not found"));
     }
 
     public Long create(WeeklyEntity oWeeklyEntity) {
-        oWeeklyEntity.setId_weekly(null);
-        return oWeeklyRepository.save(oWeeklyEntity).getId_weekly();
+        oWeeklyEntity.setId(null);
+        return oWeeklyRepository.save(oWeeklyEntity).getId();
     }
 
     public WeeklyEntity update(WeeklyEntity oWeeklyEntity) {
-        WeeklyEntity oWeeklyEntity2 = oWeeklyRepository.findById(oWeeklyEntity.getId_weekly())
+        WeeklyEntity oWeeklyEntity2 = oWeeklyRepository.findById(oWeeklyEntity.getId())
           .orElseThrow(() -> new ResourceNotFoundException("Weekly not found"));
           oWeeklyEntity2.setId_user(oWeeklyEntity.getId_user());
           oWeeklyEntity2.setInit_date(oWeeklyEntity.getInit_date());
@@ -45,9 +45,9 @@ public class WeeklyService {
         return oWeeklyRepository.findAll(oPageable);
     }
 
-    public Long delete(Long id_weekly) {
-        oWeeklyRepository.deleteById(id_weekly);
-        return id_weekly;
+    public Long delete(Long id) {
+        oWeeklyRepository.deleteById(id);
+        return id;
     }
 
     @Transactional

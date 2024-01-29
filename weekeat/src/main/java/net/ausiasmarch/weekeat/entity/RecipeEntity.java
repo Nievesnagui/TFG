@@ -24,7 +24,7 @@ import jakarta.validation.constraints.Size;
 public class RecipeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_recipe;
+    private Long id;
 
     @JsonBackReference("user-recipe")
     @ManyToOne
@@ -79,21 +79,21 @@ public class RecipeEntity {
         this.recipe_image = recipe_image;
     }
 
-    public RecipeEntity(Long id_recipe, UserEntity id_user, @NotBlank @NotNull @Size(min = 6, max = 255) String name,
+    public RecipeEntity(Long id, UserEntity id_user, @NotBlank @NotNull @Size(min = 6, max = 255) String name,
             @NotNull @NotBlank String description, byte[] recipe_image) {
-        this.id_recipe = id_recipe;
+        this.id = id;
         this.id_user = id_user;
         this.name = name;
         this.description = description;
         this.recipe_image = recipe_image;
     }
 
-    public Long getId_recipe() {
-        return id_recipe;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_recipe(Long id_recipe) {
-        this.id_recipe = id_recipe;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public UserEntity getId_user() {

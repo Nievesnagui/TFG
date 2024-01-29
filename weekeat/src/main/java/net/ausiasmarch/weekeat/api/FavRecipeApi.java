@@ -23,9 +23,9 @@ public class FavRecipeApi {
     @Autowired
     FavRecipeService oFavRecipeService;
 
-    @GetMapping("/{id_fav}")
-    public ResponseEntity<FavRecipeEntity> get(@PathVariable("id_fav") Long id_fav) {
-        return  ResponseEntity.ok(oFavRecipeService.get(id_fav));
+    @GetMapping("/{id}")
+    public ResponseEntity<FavRecipeEntity> get(@PathVariable("id") Long id) {
+        return  ResponseEntity.ok(oFavRecipeService.get(id));
     }
 
     @PostMapping("")
@@ -33,9 +33,9 @@ public class FavRecipeApi {
         return  ResponseEntity.ok(oFavRecipeService.create(oFavRecipeEntity));
     }
 
-    @DeleteMapping("/{id_fav}")
-    public ResponseEntity<Long> delete(@PathVariable("id_fav") Long id_fav) {
-        return  ResponseEntity.ok(oFavRecipeService.delete(id_fav));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return  ResponseEntity.ok(oFavRecipeService.delete(id));
     }
 
     @GetMapping("")

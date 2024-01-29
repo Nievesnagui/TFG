@@ -17,13 +17,16 @@ public class IngredientService {
     IngredientRepository oIngredientRepository;
 
     @Autowired
+    TypeService oTypeService;
+
+    @Autowired
     HttpServletRequest oHttpServletRequest;
 
     @Autowired
     SessionService oSessionService;
 
-    public IngredientEntity get(Long id_ingredient) {
-        return oIngredientRepository.findById(id_ingredient)
+    public IngredientEntity get(Long id) {
+        return oIngredientRepository.findById(id)
               .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
     }
 
@@ -34,13 +37,14 @@ public class IngredientService {
 
     public Long create(IngredientEntity oIngredientEntity) {
         oSessionService.onlyAdmins();
-        oIngredientEntity.setId_ingredient(null);
-        return oIngredientRepository.save(oIngredientEntity).getId_ingredient();
+        oIngredientEntity.setId(null);
+        return oIngredientRepository.save(oIngredientEntity).getId();
+        //Creo que debería estar sin el getId
     }
 
     public IngredientEntity update(IngredientEntity oIngredientEntity) {
         oSessionService.onlyAdmins();
-        IngredientEntity oIngredientEntity2 = oIngredientRepository.findById(oIngredientEntity.getId_ingredient())
+        IngredientEntity oIngredientEntity2 = oIngredientRepository.findById(oIngredientEntity.getId())
             .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
         oIngredientEntity2.setName(oIngredientEntity.getName());
         oIngredientEntity2.setId_type(oIngredientEntity.getId_type());
@@ -48,14 +52,23 @@ public class IngredientService {
         return oIngredientRepository.save(oIngredientEntity2);
     }
 
-    public Page<IngredientEntity> getPage(Pageable oPageable) {
-        return oIngredientRepository.findAll(oPageable);
+    public Page<IngredientEntity> getPage(Pageable oPageable/*, Long id_type*/) {
+       // if(id_type == null){
+            return oIngredientRepository.findAll(oPageable);
+       /* } else {
+            return oIngredientRepository.findByIdTypeId(id_type, oPageable);
+        }*/
     }
 
-    public Long delete(Long id_ingredient) {
+    public Long delete(Long id) {
         oSessionService.onlyAdmins();
-        oIngredientRepository.deleteById(id_ingredient);
-        return id_ingredient;
+        oIngredientRepository.deleteById(id);
+        return id;
+//Creo que debería ser como comento abajo:
+       /* IngredientEntity oIngredient2 = oIngredientRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("No such resource")); 
+            oIngredientRepository.deleteById(id);
+            return oIngredient2;*/
     }
 
     @Transactional

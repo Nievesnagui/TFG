@@ -23,9 +23,9 @@ public class WeeklyApi {
     @Autowired
     WeeklyService oWeeklyService;
 
-    @GetMapping("/{id_weekly}")
-    public ResponseEntity<WeeklyEntity> get(@PathVariable("id_weekly") Long id_weekly) {
-        return  ResponseEntity.ok(oWeeklyService.get(id_weekly));
+    @GetMapping("/{id}")
+    public ResponseEntity<WeeklyEntity> get(@PathVariable("id") Long id) {
+        return  ResponseEntity.ok(oWeeklyService.get(id));
     }
 
     @PostMapping("")
@@ -33,9 +33,9 @@ public class WeeklyApi {
         return  ResponseEntity.ok(oWeeklyService.create(oWeeklyEntity));
     }
 
-    @DeleteMapping("/{id_weekly}")
-    public ResponseEntity<Long> delete(@PathVariable("id_weekly") Long id_weekly) {
-        return  ResponseEntity.ok(oWeeklyService.delete(id_weekly));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return  ResponseEntity.ok(oWeeklyService.delete(id));
     }
 
     @GetMapping("")

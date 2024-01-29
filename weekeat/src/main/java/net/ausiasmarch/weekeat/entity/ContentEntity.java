@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 public class ContentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_content;
+    private Long id;
 
     @JsonBackReference("ingredient-content")
     @ManyToOne
@@ -35,18 +35,18 @@ public class ContentEntity {
         this.id_recipe = id_recipe;
     }
 
-    public ContentEntity(Long id_content, IngredientEntity id_ingredient, RecipeEntity id_recipe) {
-        this.id_content = id_content;
+    public ContentEntity(Long id, IngredientEntity id_ingredient, RecipeEntity id_recipe) {
+        this.id = id;
         this.id_ingredient = id_ingredient;
         this.id_recipe = id_recipe;
     }
 
-    public Long getId_content() {
-        return id_content;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_content(Long id_content) {
-        this.id_content = id_content;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public IngredientEntity getId_ingredient() {

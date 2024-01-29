@@ -28,7 +28,7 @@ public class FavRecipeService {
     }
 
     public Long create(FavRecipeEntity oFavRecipeEntity) {
-        return oFavRecipeRepository.save(oFavRecipeEntity).getId_fav();
+        return oFavRecipeRepository.save(oFavRecipeEntity).getId();
     }
 
     public Page<FavRecipeEntity> getPage(Pageable oPageable) {

@@ -21,22 +21,22 @@ public class ContentService {
     @Autowired
     SessionService oSessionService;
 
-    public ContentEntity get(Long id_content) {
-        return oContentRepository.findById(id_content)
+    public ContentEntity get(Long id) {
+        return oContentRepository.findById(id)
               .orElseThrow(() -> new ResourceNotFoundException("Content not found"));
     }
 
     public Long create(ContentEntity oContentEntity) {
-        return oContentRepository.save(oContentEntity).getId_content();
+        return oContentRepository.save(oContentEntity).getId();
     }
 
     public Page<ContentEntity> getPage(Pageable oPageable) {
         return oContentRepository.findAll(oPageable);
     }
 
-    public Long delete(Long id_content) {
-        oContentRepository.deleteById(id_content);
-        return id_content;
+    public Long delete(Long id) {
+        oContentRepository.deleteById(id);
+        return id;
     }
 
     @Transactional

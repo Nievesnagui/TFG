@@ -24,7 +24,7 @@ import jakarta.validation.constraints.Size;
 public class IngredientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_ingredient;
+    private Long id;
 
     @JsonBackReference("type-ingredient")
     @ManyToOne
@@ -33,7 +33,7 @@ public class IngredientEntity {
 
     @NotBlank
     @NotNull
-    @Size(min = 6, max = 255)
+    @Size(min = 3, max = 255)
     private String name;
 
     @Lob
@@ -53,27 +53,27 @@ public class IngredientEntity {
         this.name = name;
     }
 
-    public IngredientEntity(Long id_ingredient, TypeEntity id_type,
+    public IngredientEntity(Long id, TypeEntity id_type,
             @NotBlank @NotNull @Size(min = 6, max = 255) String name, byte[] ingredient_image) {
-        this.id_ingredient = id_ingredient;
+        this.id = id;
         this.id_type = id_type;
         this.name = name;
         this.ingredient_image = ingredient_image;
     }
 
-    public IngredientEntity(TypeEntity id_type, @NotBlank @NotNull @Size(min = 6, max = 255) String name,
+    public IngredientEntity(TypeEntity id_type, @NotBlank @NotNull @Size(min = 3, max = 255) String name,
             byte[] ingredient_image) {
         this.id_type = id_type;
         this.name = name;
         this.ingredient_image = ingredient_image;
     }
 
-    public Long getId_ingredient() {
-        return id_ingredient;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_ingredient(Long id_ingredient) {
-        this.id_ingredient = id_ingredient;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public TypeEntity getId_type() {

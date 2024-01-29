@@ -22,7 +22,7 @@ import jakarta.persistence.Table;
 public class WeeklyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_weekly;
+    private Long id;
 
     @JsonBackReference("user-weekly")
     @ManyToOne
@@ -49,8 +49,8 @@ public class WeeklyEntity {
         this.init_date = init_date;
     }
 
-    public WeeklyEntity(Long id_weekly, UserEntity id_user, LocalDate init_date) {
-        this.id_weekly = id_weekly;
+    public WeeklyEntity(Long id, UserEntity id_user, LocalDate init_date) {
+        this.id = id;
         this.id_user = id_user;
         this.init_date = init_date;
     }
@@ -61,19 +61,19 @@ public class WeeklyEntity {
         this.end_date = end_date;
     }
 
-    public WeeklyEntity(Long id_weekly, UserEntity id_user, LocalDate init_date, LocalDate end_date) {
-        this.id_weekly = id_weekly;
+    public WeeklyEntity(Long id, UserEntity id_user, LocalDate init_date, LocalDate end_date) {
+        this.id = id;
         this.id_user = id_user;
         this.init_date = init_date;
         this.end_date = end_date;
     }
 
-    public Long getId_weekly() {
-        return id_weekly;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_weekly(Long id_weekly) {
-        this.id_weekly = id_weekly;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public UserEntity getId_user() {

@@ -19,7 +19,7 @@ public class ScheduleEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_schedule;
+    private Long id;
     
     @JsonBackReference("weekly-schedule")
     @ManyToOne
@@ -55,10 +55,10 @@ public class ScheduleEntity {
 
 
 
-    public ScheduleEntity(Long id_schedule, WeeklyEntity id_weekly, RecipeEntity id_recipe,
+    public ScheduleEntity(Long id, WeeklyEntity id_weekly, RecipeEntity id_recipe,
             @NotBlank @NotNull @Size(min = 2, max = 20) String type,
             @NotBlank @NotNull @Size(min = 2, max = 20) String day) {
-        this.id_schedule = id_schedule;
+        this.id = id;
         this.id_weekly = id_weekly;
         this.id_recipe = id_recipe;
         this.type = type;
@@ -67,12 +67,12 @@ public class ScheduleEntity {
 
 
 
-    public Long getId_schedule() {
-        return id_schedule;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_schedule(Long id_schedule) {
-        this.id_schedule = id_schedule;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public WeeklyEntity getId_weekly() {

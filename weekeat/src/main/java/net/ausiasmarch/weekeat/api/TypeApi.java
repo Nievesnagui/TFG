@@ -25,9 +25,9 @@ public class TypeApi {
     @Autowired
     TypeService oTypeService;
 
-    @GetMapping("/{id_type}")
-    public ResponseEntity<TypeEntity> get(@PathVariable("id_type") Long id_type) {
-        return ResponseEntity.ok(oTypeService.get(id_type));
+    @GetMapping("/{id}")
+    public ResponseEntity<TypeEntity> get(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oTypeService.get(id));
     }
 
     @PostMapping("")
@@ -41,9 +41,9 @@ public class TypeApi {
 
     }
 
-    @DeleteMapping("/{id_type}")
-    public ResponseEntity<Long> delete(@PathVariable("id_type") Long id_type) {
-        return ResponseEntity.ok(oTypeService.delete(id_type));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oTypeService.delete(id));
     }
 
     @GetMapping("")

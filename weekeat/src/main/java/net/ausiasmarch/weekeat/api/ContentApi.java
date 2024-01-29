@@ -23,9 +23,9 @@ public class ContentApi {
     @Autowired
     ContentService oContentService;
 
-    @GetMapping("/{content_id}")
-    public ResponseEntity<ContentEntity> get(@PathVariable("content_id") Long id_content) {
-        return  ResponseEntity.ok(oContentService.get(id_content));
+    @GetMapping("/{id}")
+    public ResponseEntity<ContentEntity> get(@PathVariable("id") Long id) {
+        return  ResponseEntity.ok(oContentService.get(id));
     }
 
     @PostMapping("")
@@ -33,9 +33,9 @@ public class ContentApi {
         return  ResponseEntity.ok(oContentService.create(oContentEntity));
     }   
 
-    @DeleteMapping("/{content_id}")
-    public ResponseEntity<Long> delete(@PathVariable("content_id") Long id_content) {
-        return  ResponseEntity.ok(oContentService.delete(id_content));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return  ResponseEntity.ok(oContentService.delete(id));
     }
 
     @GetMapping("")
