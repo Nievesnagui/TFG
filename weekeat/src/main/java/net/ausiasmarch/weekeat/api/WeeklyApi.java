@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import net.ausiasmarch.weekeat.api.dto.WeeklyDTO;
 import net.ausiasmarch.weekeat.entity.WeeklyEntity;
 import net.ausiasmarch.weekeat.service.WeeklyService;
 
@@ -24,7 +26,7 @@ public class WeeklyApi {
     WeeklyService oWeeklyService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<WeeklyEntity> get(@PathVariable("id") Long id) {
+    public ResponseEntity<WeeklyDTO> get(@PathVariable("id") Long id) {
         return  ResponseEntity.ok(oWeeklyService.get(id));
     }
 

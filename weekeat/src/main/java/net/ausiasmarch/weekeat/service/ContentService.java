@@ -5,8 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import net.ausiasmarch.weekeat.api.dto.ContentDTO;
 import net.ausiasmarch.weekeat.entity.ContentEntity;
-import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
 import net.ausiasmarch.weekeat.repository.ContentRepository;
 
 @Service
@@ -21,9 +21,9 @@ public class ContentService {
     @Autowired
     SessionService oSessionService;
 
-    public ContentEntity get(Long id) {
-        return oContentRepository.findById(id)
-              .orElseThrow(() -> new ResourceNotFoundException("Content not found"));
+    public ContentDTO get(Long id) {
+        var content = oContentRepository.findById(id).orElse(new ContentEntity());
+        return new ContentDTO(content.getId(),content.getId_ingredient(), content.getId_recipe());
     }
 
     public Long create(ContentEntity oContentEntity) {

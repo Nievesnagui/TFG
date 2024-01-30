@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,17 +46,17 @@ public class RecipeEntity {
 
     
     @JsonManagedReference("recipe-content")
-    @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_recipe", fetch = FetchType.EAGER)
     private List<ContentEntity> content;
     
 
     @JsonManagedReference("recipe-favourite")
-    @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_recipe", fetch = FetchType.EAGER)
     private List<FavRecipeEntity> favs;
 
 
     @JsonManagedReference("recipe-schedule")
-    @OneToMany(mappedBy = "id_recipe", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_recipe", fetch = FetchType.EAGER)
     private List<ScheduleEntity> schedules;
 
     public RecipeEntity() {

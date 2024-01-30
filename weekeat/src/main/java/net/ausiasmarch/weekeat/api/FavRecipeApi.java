@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import net.ausiasmarch.weekeat.api.dto.FavRecipeDTO;
 import net.ausiasmarch.weekeat.entity.FavRecipeEntity;
 import net.ausiasmarch.weekeat.service.FavRecipeService;
 
@@ -24,7 +26,7 @@ public class FavRecipeApi {
     FavRecipeService oFavRecipeService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<FavRecipeEntity> get(@PathVariable("id") Long id) {
+    public ResponseEntity<FavRecipeDTO> get(@PathVariable("id") Long id) {
         return  ResponseEntity.ok(oFavRecipeService.get(id));
     }
 

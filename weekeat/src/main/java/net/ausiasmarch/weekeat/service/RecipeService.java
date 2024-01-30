@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import net.ausiasmarch.weekeat.api.dto.RecipeDTO;
 import net.ausiasmarch.weekeat.entity.RecipeEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
 import net.ausiasmarch.weekeat.repository.RecipeRepository;
@@ -22,9 +23,9 @@ public class RecipeService {
     @Autowired
     SessionService oSessionService;
 
-    public RecipeEntity get(Long id) {
-        return oRecipeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
+    public RecipeDTO get(Long id) {
+        var recipe = oRecipeRepository.findById(id).orElse(new RecipeEntity());
+        return new RecipeDTO(recipe.getId(), recipe.getId_user().getUsername(), recipe.getName(), recipe.getDescription(), recipe.getRecipe_image(), recipe.getContent(), recipe.getFavs(), recipe.getSchedulesList());
     }
 
     public RecipeEntity getByName(String name) {

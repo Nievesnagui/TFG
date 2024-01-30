@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import net.ausiasmarch.weekeat.api.dto.RecipeDTO;
 import net.ausiasmarch.weekeat.entity.RecipeEntity;
 import net.ausiasmarch.weekeat.service.RecipeService;
 
@@ -26,7 +27,7 @@ public class RecipeApi {
     RecipeService oRecipeService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<RecipeEntity> get(@PathVariable("id") Long id) {
+    public ResponseEntity<RecipeDTO> get(@PathVariable("id") Long id) {
         return ResponseEntity.ok(oRecipeService.get(id));
     }
 

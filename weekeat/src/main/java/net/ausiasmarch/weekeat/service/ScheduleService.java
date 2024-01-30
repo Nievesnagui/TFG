@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import net.ausiasmarch.weekeat.api.dto.ScheduleDTO;
 import net.ausiasmarch.weekeat.entity.ScheduleEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
 import net.ausiasmarch.weekeat.repository.ScheduleRepository;
@@ -22,9 +23,9 @@ public class ScheduleService {
     @Autowired
     SessionService oSessionService;
 
-    public ScheduleEntity get(Long id) {
-        return oScheduleRepository.findById(id)
-          .orElseThrow(() -> new ResourceNotFoundException("Schedule not found"));
+    public ScheduleDTO get(Long id) {
+        var schedule = oScheduleRepository.findById(id).orElse(new ScheduleEntity());
+        return new ScheduleDTO(schedule.getId(), schedule.getId_weekly(), schedule.getId_recipe(), schedule.getType(), schedule.getDay());
     }
 
     public Long create(ScheduleEntity oScheduleEntity) {

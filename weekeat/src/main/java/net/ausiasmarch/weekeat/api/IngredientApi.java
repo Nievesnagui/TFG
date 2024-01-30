@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import net.ausiasmarch.weekeat.api.dto.IngredientDTO;
 import net.ausiasmarch.weekeat.entity.IngredientEntity;
 import net.ausiasmarch.weekeat.service.IngredientService;
 
@@ -26,7 +28,7 @@ public class IngredientApi {
     IngredientService oIngredientService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<IngredientEntity> get(@PathVariable("id") Long id) {
+    public ResponseEntity<IngredientDTO> get(@PathVariable("id") Long id) {
         return ResponseEntity.ok(oIngredientService.get(id));
     }
 

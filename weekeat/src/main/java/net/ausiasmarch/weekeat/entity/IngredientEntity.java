@@ -6,7 +6,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,14 +36,16 @@ public class IngredientEntity {
     @NotBlank
     @NotNull
     @Size(min = 3, max = 255)
+    @Column(name = "name")
     private String name;
 
     @Lob
+    @Column(name = "ingredient_image")
     private byte[] ingredient_image;
 
 
     @JsonManagedReference("ingredient-content")
-    @OneToMany(mappedBy = "id_ingredient", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_ingredient", fetch = FetchType.EAGER)
     private List<ContentEntity> content;
 
     public IngredientEntity() {

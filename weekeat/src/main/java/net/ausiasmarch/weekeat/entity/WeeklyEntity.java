@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,7 +38,7 @@ public class WeeklyEntity {
 
 
     @JsonManagedReference("weekly-schedule")
-    @OneToMany(mappedBy = "id_weekly", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_weekly", fetch = FetchType.EAGER)
     private List<ScheduleEntity> schedules;
     
     public WeeklyEntity() {

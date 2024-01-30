@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import net.ausiasmarch.weekeat.api.dto.ContentDTO;
 import net.ausiasmarch.weekeat.entity.ContentEntity;
 import net.ausiasmarch.weekeat.service.ContentService;
 
@@ -24,7 +26,7 @@ public class ContentApi {
     ContentService oContentService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContentEntity> get(@PathVariable("id") Long id) {
+    public ResponseEntity<ContentDTO> get(@PathVariable("id") Long id) {
         return  ResponseEntity.ok(oContentService.get(id));
     }
 

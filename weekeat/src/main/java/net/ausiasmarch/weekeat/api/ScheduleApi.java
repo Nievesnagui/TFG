@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import net.ausiasmarch.weekeat.api.dto.ScheduleDTO;
 import net.ausiasmarch.weekeat.entity.ScheduleEntity;
 import net.ausiasmarch.weekeat.service.ScheduleService;
 
@@ -25,7 +27,7 @@ public class ScheduleApi {
     ScheduleService oScheduleService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScheduleEntity> get(@PathVariable("id") Long id) {
+    public ResponseEntity<ScheduleDTO> get(@PathVariable("id") Long id) {
         return  ResponseEntity.ok(oScheduleService.get(id));
     }
 

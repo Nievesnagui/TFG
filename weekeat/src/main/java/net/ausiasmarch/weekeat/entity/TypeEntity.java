@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,9 +28,8 @@ public class TypeEntity {
     @Size(min = 2, max = 255)
     private String name;
 
-
     @JsonManagedReference("type-ingredient")
-    @OneToMany(mappedBy = "id_type", fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "id_type",  fetch = FetchType.EAGER)
     private List<IngredientEntity> ingredients;
 
     public TypeEntity() {

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import net.ausiasmarch.weekeat.api.dto.WeeklyDTO;
 import net.ausiasmarch.weekeat.entity.WeeklyEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
 import net.ausiasmarch.weekeat.repository.WeeklyRepository;
@@ -22,9 +23,9 @@ public class WeeklyService {
     @Autowired
     SessionService oSessionService;
 
-    public WeeklyEntity get(Long id) {
-        return oWeeklyRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Weekly not found"));
+    public WeeklyDTO get(Long id) {
+        var weekly = oWeeklyRepository.findById(id).orElse(new WeeklyEntity());
+        return new WeeklyDTO(id, weekly.getId_user(), weekly.getInit_date(), weekly.getEnd_date(), weekly.getSchedulesList());
     }
 
     public Long create(WeeklyEntity oWeeklyEntity) {
