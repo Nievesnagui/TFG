@@ -25,7 +25,7 @@ public class RecipeService {
 
     public RecipeDTO get(Long id) {
         var recipe = oRecipeRepository.findById(id).orElse(new RecipeEntity());
-        return new RecipeDTO(recipe.getId(), recipe.getId_user().getUsername(), recipe.getName(), recipe.getDescription(), recipe.getRecipe_image(), recipe.getContent(), recipe.getFavs(), recipe.getSchedulesList());
+        return RecipeDTO.fromRecipe(recipe);
     }
 
     public RecipeEntity getByName(String name) {
@@ -47,9 +47,12 @@ public class RecipeService {
         return oRecipeRepository.save(oRecipeEntity2);
     }
 
-    public Page<RecipeEntity> getPage(Pageable oPageable) {
-        return oRecipeRepository.findAll(oPageable);
+    public Page<RecipeDTO> getPage(Pageable oPageable, Long id_user) {
+        return oRecipeRepository.findAll(oPageable)
+        .map(RecipeDTO::fromRecipe);
     }
+
+
 
     public Long delete(Long id) {
         oRecipeRepository.deleteById(id);

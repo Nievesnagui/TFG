@@ -58,18 +58,25 @@ public class IngredientService {
         return oIngredientRepository.save(oIngredientEntity2);
     }
 
-    public Page<IngredientEntity> getPage(Pageable oPageable/* , Long id_type */) {
-
-        //quiero poner aquí el dto pero no tengo muy claro cómo por el findall
-
-        // if(id_type == null){
-        return oIngredientRepository.findAll(oPageable);
-        /*
-         * } else {
-         * return oIngredientRepository.findByIdTypeId(id_type, oPageable);
-         * }
-         */
+    public Page<IngredientDTO> getPage(Pageable pageable, Long id_type) {
+      
+            // Si id_type es nulo, devolver todos los ingredientes paginados
+            return oIngredientRepository.findAll(pageable)
+                .map(ingredient -> mapToIngredientDTO(ingredient)); // Mapear a IngredientDTO
+     
     }
+
+    private IngredientDTO mapToIngredientDTO(IngredientEntity ingredient) {
+        // Aquí debes implementar la lógica para convertir un Ingredient a IngredientDTO
+        // Puedes hacerlo manualmente o usando un mapeador como ModelMapper
+        // Por ejemplo, si usas ModelMapper:
+        // IngredientDTO ingredientDTO = modelMapper.map(ingredient, IngredientDTO.class);
+        // return ingredientDTO;
+
+        // Ejemplo de mapeo manual (ajusta según tu estructura real)
+        return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(), ingredient.getContent(), ingredient.getContentList());
+    }
+
 
     public Long delete(Long id) {
         oSessionService.onlyAdmins();
