@@ -51,7 +51,13 @@ public class RecipeApi {
     @GetMapping("")
     public ResponseEntity<Page<RecipeDTO>> getPage(Pageable oPageable, 
     @RequestParam(value = "id_user", required = false) Long id_user) {
-        return ResponseEntity.ok(oRecipeService.getPage(oPageable, id_user));
+
+        if(id_user != null){
+            return ResponseEntity.ok(oRecipeService.geRecipesByUser(id_user, oPageable));
+        } else{
+            return ResponseEntity.ok(oRecipeService.getPage(oPageable, id_user));
+
+        }
     }
 
     @GetMapping("/byName/{name}")

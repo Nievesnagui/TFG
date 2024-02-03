@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +42,16 @@ public class ContentApi {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<ContentEntity>> getPage(Pageable oPageable) {
-        return  ResponseEntity.ok(oContentService.getPage(oPageable));
+    public ResponseEntity<Page<ContentDTO>> getPage(Pageable oPageable,
+                           @RequestParam(value = "id_ingredient", defaultValue = "", required = false) Long id_ingredient,
+                           @RequestParam(value = "id_recipe", defaultValue = "", required = false) Long id_recipe) {
+    
+        if (id_recipe != null) {
+            return ResponseEntity.ok(oContentService.getContentsByRecipe(id_recipe, oPageable));
+        } else if (id_ingredient != null) {
+            return ResponseEntity.ok(oContentService.getContentsByIngredient(id_ingredient, oPageable));
+        } else {
+            return ResponseEntity.ok(oContentService.getPage(oPageable, null, null)); // Obtener todos los contenidos
+        }
     }
 }

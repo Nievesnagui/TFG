@@ -5,7 +5,7 @@ import net.ausiasmarch.weekeat.entity.RecipeEntity;
 import net.ausiasmarch.weekeat.entity.ScheduleEntity;
 import net.ausiasmarch.weekeat.entity.UserEntity;
 
-public record RecipeDTO(Long id, UserEntity user, String name, String description, byte[] recipe_image,
+public record RecipeDTO(Long id, UserEntity id_user, String name, String description, byte[] recipe_image,
         List<ContentDTO> content, List<FavRecipeDTO> favs, List<ScheduleEntity> schedules) {
     public static RecipeDTO fromRecipe(RecipeEntity recipe) {
         return new RecipeDTO(recipe.getId(), recipe.getId_user(), recipe.getName(), recipe.getDescription(),

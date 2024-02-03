@@ -1,8 +1,12 @@
 package net.ausiasmarch.weekeat.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -49,10 +53,27 @@ public class RecipeService {
 
     public Page<RecipeDTO> getPage(Pageable oPageable, Long id_user) {
         return oRecipeRepository.findAll(oPageable)
-        .map(RecipeDTO::fromRecipe);
+                .map(RecipeDTO::fromRecipe);
     }
 
+    public Page<RecipeDTO> geRecipesByUser(Long id_user, Pageable oPageable) {
+        return filterRecipe(id_user,oPageable);
+    }
 
+    private Page<RecipeDTO> filterRecipe(Long id_user, Pageable oPageable) {
+
+        if (id_user == null) {
+            return oRecipeRepository.findAll(oPageable).map(RecipeDTO::fromRecipe);
+        } else {
+            List<RecipeDTO> resultadoFiltro = oRecipeRepository.findAll().stream()
+                    .filter(recipe -> recipe.getId_user().getId().equals(id_user))
+                    .map(RecipeDTO::fromRecipe)
+                    .collect(Collectors.toList());
+
+            return new PageImpl<>(resultadoFiltro, oPageable, resultadoFiltro.size());
+        }
+
+    }
 
     public Long delete(Long id) {
         oRecipeRepository.deleteById(id);
