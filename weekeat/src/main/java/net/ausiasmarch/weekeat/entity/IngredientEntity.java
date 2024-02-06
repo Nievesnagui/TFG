@@ -39,9 +39,7 @@ public class IngredientEntity {
     @Column(name = "name")
     private String name;
 
-    @Lob
-    @Column(name = "ingredient_image")
-    private byte[] ingredient_image;
+    private String ingredient_image;
 
 
     @JsonManagedReference("ingredient-content")
@@ -58,7 +56,7 @@ public class IngredientEntity {
     }
 
     public IngredientEntity(Long id, TypeEntity id_type,
-            @NotBlank @NotNull @Size(min = 6, max = 255) String name, byte[] ingredient_image) {
+            @NotBlank @NotNull @Size(min = 6, max = 255) String name, String ingredient_image) {
         this.id = id;
         this.id_type = id_type;
         this.name = name;
@@ -66,7 +64,7 @@ public class IngredientEntity {
     }
 
     public IngredientEntity(TypeEntity id_type, @NotBlank @NotNull @Size(min = 3, max = 255) String name,
-            byte[] ingredient_image) {
+    String ingredient_image) {
         this.id_type = id_type;
         this.name = name;
         this.ingredient_image = ingredient_image;
@@ -96,11 +94,11 @@ public class IngredientEntity {
         this.name = name;
     }
 
-    public byte[] getIngredient_image() {
+    public String getIngredient_image() {
         return ingredient_image;
     }
 
-    public void setIngredient_image(byte[] ingredient_image) {
+    public void setIngredient_image(String ingredient_image) {
         this.ingredient_image = ingredient_image;
     }
 

@@ -75,9 +75,19 @@ public class ContentService {
                 return oContentRepository.findAll(oPageable).map(ContentDTO::fromContent);
             } else {
                 List<ContentDTO> resultadoFiltro = oContentRepository.findAll().stream()
-                        .filter(content -> content.getId_recipe().getId().equals(id_recipe))
+                        .filter(content -> 
+                        {
+                            var recipe = content.getId_recipe();
+                            if(recipe != null){
+                                return content.getId_recipe().getId().equals(id_recipe);
+                            } else{
+                                return false;
+                            }
+                           
+                        })
                         .map(ContentDTO::fromContent)
                         .collect(Collectors.toList());
+                        
     
                 return new PageImpl<>(resultadoFiltro, oPageable, resultadoFiltro.size());
             }

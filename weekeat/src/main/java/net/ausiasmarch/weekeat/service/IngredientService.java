@@ -19,6 +19,9 @@ public class IngredientService {
     IngredientRepository oIngredientRepository;
 
     @Autowired
+    ContentService oContentService;
+
+    @Autowired
     TypeService oTypeService;
 
     @Autowired
@@ -27,13 +30,14 @@ public class IngredientService {
     @Autowired
     SessionService oSessionService;
 
-    public /*IngredientEntity*/ IngredientDTO get(Long id) {
+    public /* IngredientEntity */ IngredientDTO get(Long id) {
         var ingredient = oIngredientRepository.findById(id).orElse(new IngredientEntity());
 
         ///////
-        return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(), ingredient.getContent(), ingredient.getContentList());
-         //oIngredientRepository.findById(id)
-              //.orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
+        return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(),
+                ingredient.getContent(), ingredient.getContentList(), false);
+        // oIngredientRepository.findById(id)
+        // .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
     }
 
     public IngredientEntity getByName(String name) {
@@ -59,24 +63,21 @@ public class IngredientService {
     }
 
     public Page<IngredientDTO> getPage(Pageable pageable, Long id_type) {
-      
-            // Si id_type es nulo, devolver todos los ingredientes paginados
-            return oIngredientRepository.findAll(pageable)
-                .map(ingredient -> mapToIngredientDTO(ingredient)); // Mapear a IngredientDTO
-     
+        return oIngredientRepository.findAll(pageable)
+                .map(ingredient -> mapToIngredientDTO(ingredient));
+    }
+
+    public Page<IngredientDTO> getPageByContentFilter(Pageable pageable, Long id_recipe) {
+        var contents = oContentService.getContentsByRecipe(id_recipe, pageable);
+        var ingredientsInRecipe = contents.map(c -> c.ingredient().getId()).toList();
+        return oIngredientRepository.findAll(pageable)
+                .map(ingredient -> IngredientDTO.fromIngredient(ingredient, ingredientsInRecipe.stream().anyMatch(id -> ingredient.getId().equals(id))));
     }
 
     private IngredientDTO mapToIngredientDTO(IngredientEntity ingredient) {
-        // Aquí debes implementar la lógica para convertir un Ingredient a IngredientDTO
-        // Puedes hacerlo manualmente o usando un mapeador como ModelMapper
-        // Por ejemplo, si usas ModelMapper:
-        // IngredientDTO ingredientDTO = modelMapper.map(ingredient, IngredientDTO.class);
-        // return ingredientDTO;
-
-        // Ejemplo de mapeo manual (ajusta según tu estructura real)
-        return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(), ingredient.getContent(), ingredient.getContentList());
+        return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(),
+                ingredient.getContent(), ingredient.getContentList(), false);
     }
-
 
     public Long delete(Long id) {
         oSessionService.onlyAdmins();

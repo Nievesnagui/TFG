@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import net.ausiasmarch.weekeat.entity.UserEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
+import net.ausiasmarch.weekeat.helper.DataGenerationHelper;
 import net.ausiasmarch.weekeat.repository.UserRepository;
 
 @Service
@@ -71,17 +72,34 @@ public class UserService {
 
     @Transactional
     public Long empty() {
-        oSessionService.onlyAdmins();
+//        oSessionService.onlyAdmins();
         oUserRepository.deleteAll();
         oUserRepository.resetAutoIncrement();
         UserEntity oUserEntity1 = new UserEntity("administrador", "Admin", "Apellido", "mail1@mail.com",
-                "658945123", "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e",
+                "658945123", "c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261",
                 false);
         oUserRepository.save(oUserEntity1);
         oUserEntity1 = new UserEntity("usuario", "Admin", "Apellido", "mail2@mail.com",
-        "658945123", "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e",
+        "658945123", "c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261",
         false);
         oUserRepository.save(oUserEntity1);
         return oUserRepository.count();
+    }
+
+    public Long populate(Integer amount) {
+        for (int i = 0; i < amount; i++) {
+            String password = "unapasswordsegura12345567789976543" + i;
+            String name = DataGenerationHelper.getRadomName();
+            String surname = DataGenerationHelper.getRadomSurname();
+            String email = name.substring(0, 3) + surname.substring(0, 3) + i
+                    + "@ausiasmarch.net";
+            String username = DataGenerationHelper
+                    .doNormalizeString(
+                            name.substring(0, 3) + surname.substring(1, 3) + i);
+            oUserRepository.save(
+                    new UserEntity(username,name,surname, email, "654123654", password, false));
+        }
+        return oUserRepository.count();
+
     }
 }

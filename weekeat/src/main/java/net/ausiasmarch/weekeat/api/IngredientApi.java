@@ -55,6 +55,12 @@ public class IngredientApi {
         return ResponseEntity.ok(oIngredientService.getPage(oPageable, id_type));
     }
 
+    //Pensar otro nombre
+    @GetMapping("/byContentFilter")
+    public ResponseEntity<Page<IngredientDTO>> getPageByContentFilter(Pageable oPageable, @RequestParam(value = "id_recipe", required = true)Long id_recipe ) {
+        return ResponseEntity.ok(oIngredientService.getPageByContentFilter(oPageable,id_recipe));
+    }
+
     @GetMapping("/byName/{name}")
     public ResponseEntity<IngredientEntity> get(@PathVariable("name") String name) {
         return ResponseEntity.ok(oIngredientService.getByName(name));

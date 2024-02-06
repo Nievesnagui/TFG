@@ -40,9 +40,12 @@ public class RecipeEntity {
     @NotNull
     @NotBlank
     String description;
+    
+    @NotNull
+    @NotBlank
+    String process;
 
-    @Lob
-    private byte[] recipe_image;
+    String recipe_image;
 
     
     @JsonManagedReference("recipe-content")
@@ -72,8 +75,47 @@ public class RecipeEntity {
         this.description = description;
     }
 
+    public RecipeEntity(UserEntity id_user, @NotBlank @NotNull @Size(min = 3, max = 255) String name,
+            @NotNull @NotBlank String description, @NotNull @NotBlank String process, List<ContentEntity> content,
+            List<FavRecipeEntity> favs, List<ScheduleEntity> schedules) {
+        this.id_user = id_user;
+        this.name = name;
+        this.description = description;
+        this.process = process;
+        this.content = content;
+        this.favs = favs;
+        this.schedules = schedules;
+    }
+
+    public RecipeEntity(UserEntity id_user, @NotBlank @NotNull @Size(min = 3, max = 255) String name,
+            @NotNull @NotBlank String description, @NotNull @NotBlank String process, String recipe_image,
+            List<ContentEntity> content, List<FavRecipeEntity> favs, List<ScheduleEntity> schedules) {
+        this.id_user = id_user;
+        this.name = name;
+        this.description = description;
+        this.process = process;
+        this.recipe_image = recipe_image;
+        this.content = content;
+        this.favs = favs;
+        this.schedules = schedules;
+    }
+
+    public RecipeEntity(Long id, UserEntity id_user, @NotBlank @NotNull @Size(min = 3, max = 255) String name,
+            @NotNull @NotBlank String description, @NotNull @NotBlank String process, String recipe_image,
+            List<ContentEntity> content, List<FavRecipeEntity> favs, List<ScheduleEntity> schedules) {
+        this.id = id;
+        this.id_user = id_user;
+        this.name = name;
+        this.description = description;
+        this.process = process;
+        this.recipe_image = recipe_image;
+        this.content = content;
+        this.favs = favs;
+        this.schedules = schedules;
+    }
+
     public RecipeEntity(UserEntity id_user, @NotBlank @NotNull @Size(min = 6, max = 255) String name,
-            @NotNull @NotBlank String description, byte[] recipe_image) {
+            @NotNull @NotBlank String description, String recipe_image) {
         this.id_user = id_user;
         this.name = name;
         this.description = description;
@@ -81,7 +123,7 @@ public class RecipeEntity {
     }
 
     public RecipeEntity(Long id, UserEntity id_user, @NotBlank @NotNull @Size(min = 6, max = 255) String name,
-            @NotNull @NotBlank String description, byte[] recipe_image) {
+            @NotNull @NotBlank String description, String recipe_image) {
         this.id = id;
         this.id_user = id_user;
         this.name = name;
@@ -121,13 +163,27 @@ public class RecipeEntity {
         this.description = description;
     }
 
-    public byte[] getRecipe_image() {
+    public String getRecipe_image() {
         return recipe_image;
     }
 
-    public void setRecipe_image(byte[] recipe_image) {
+    public void setRecipe_image(String recipe_image) {
         this.recipe_image = recipe_image;
     }
+
+
+    public String getProcess() {
+        return process;
+    }
+
+    public void setProcess(String process) {
+        this.process = process;
+    }
+
+    public void setSchedules(List<ScheduleEntity> schedules) {
+        this.schedules = schedules;
+    }
+
 
     public List<ContentEntity> getContent() {
         return content;

@@ -58,8 +58,8 @@ public class UserEntity {
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal")
     private String password = "c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261";
 
-    @Lob
-    private byte[] profile_picture;
+  
+    private String profile_picture;
 
     //private boolean verified;
 
@@ -91,7 +91,7 @@ public class UserEntity {
             @NotBlank @NotNull @Size(min = 3, max = 255) String surname, @Email String email,
             @NotNull @NotBlank @Size(min = 8, max = 20) @Pattern(regexp = "^[0-9]+$", message = "Phone number must be decimal") String phone,
             @NotNull @NotBlank @Size(min = 6, max = 256) @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be decimal") String password,
-            byte[] profile_picture, Boolean role) {
+            String profile_picture, Boolean role) {
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -203,11 +203,11 @@ public class UserEntity {
         this.role = role;
     }
 
-    public byte[] getProfile_picture() {
+    public String getProfile_picture() {
         return profile_picture;
     }
 
-    public void setProfile_picture(byte[] profile_picture) {
+    public void setProfile_picture(String profile_picture) {
         this.profile_picture = profile_picture;
     }
 

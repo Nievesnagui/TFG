@@ -62,4 +62,9 @@ public class UserApi {
         return ResponseEntity.ok(oUserService.getPage(oPageable));
     }
 
+    @PostMapping("/populate/{amount}")
+    public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount) {
+        return ResponseEntity.ok(oUserService.populate(amount));
+
+    }
 }

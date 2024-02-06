@@ -55,4 +55,9 @@ public class TypeApi {
     public ResponseEntity<TypeEntity> get(@PathVariable("name") String name) {
         return ResponseEntity.ok(oTypeService.getByTypeName(name));
     }
+    @PostMapping("/populate")
+    public ResponseEntity<Long> populate() {
+        return ResponseEntity.ok(oTypeService.populate());
+
+    }
 }
