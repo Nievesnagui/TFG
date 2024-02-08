@@ -13,4 +13,5 @@ public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
     @Modifying
     @Query(value = "ALTER TABLE recipe AUTO_INCREMENT = 1", nativeQuery = true)
     void resetAutoIncrement();
+
 }

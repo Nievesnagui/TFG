@@ -7,9 +7,7 @@ import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import net.ausiasmarch.weekeat.entity.TypeEntity;
-import net.ausiasmarch.weekeat.entity.UserEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
-import net.ausiasmarch.weekeat.helper.DataGenerationHelper;
 import net.ausiasmarch.weekeat.repository.TypeRepository;
 import net.ausiasmarch.weekeat.repository.UserRepository;
 

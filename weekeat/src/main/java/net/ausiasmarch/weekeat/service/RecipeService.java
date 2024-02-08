@@ -11,8 +11,10 @@ import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import net.ausiasmarch.weekeat.api.dto.RecipeDTO;
+import net.ausiasmarch.weekeat.entity.ContentEntity;
 import net.ausiasmarch.weekeat.entity.RecipeEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
+import net.ausiasmarch.weekeat.repository.ContentRepository;
 import net.ausiasmarch.weekeat.repository.RecipeRepository;
 
 @Service
@@ -20,6 +22,9 @@ public class RecipeService {
 
     @Autowired
     RecipeRepository oRecipeRepository;
+
+    @Autowired
+    ContentRepository cContentRepository;
 
     @Autowired
     HttpServletRequest oHttpServletRequest;
@@ -47,6 +52,7 @@ public class RecipeService {
         oRecipeEntity2.setName(oRecipeEntity.getName());
         oRecipeEntity2.setDescription(oRecipeEntity.getDescription());
         oRecipeEntity2.setRecipe_image(oRecipeEntity.getRecipe_image());
+        oRecipeEntity2.setProcess(oRecipeEntity.getProcess());
         oRecipeEntity.setId_user(oRecipeEntity.getId_user());
         return oRecipeRepository.save(oRecipeEntity2);
     }
@@ -76,7 +82,12 @@ public class RecipeService {
     }
 
     public Long delete(Long id) {
+        RecipeEntity recipe = oRecipeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
         oRecipeRepository.deleteById(id);
+       for (ContentEntity content : recipe.getContent()) {
+        cContentRepository.delete(content);
+    }
         return id;
     }
 

@@ -6,7 +6,7 @@ import net.ausiasmarch.weekeat.entity.ContentEntity;
 import net.ausiasmarch.weekeat.entity.IngredientEntity;
 import net.ausiasmarch.weekeat.entity.TypeEntity;
 
-public record IngredientDTO(Long id, TypeEntity id_type, String name, Integer content,
+public record IngredientDTO(Long id, TypeEntity id_type, String name, Integer content, String ingredient_image,
         List<ContentEntity> contentList, Boolean isInContent) {
     // Puedo cambiar el TypeEntity por un String typename (p.ej) y usar solo ese
     // parámetro
@@ -16,6 +16,6 @@ public record IngredientDTO(Long id, TypeEntity id_type, String name, Integer co
 
     public static IngredientDTO fromIngredient(IngredientEntity ingredient,Boolean isInContent) {
         return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(),
-        ingredient.getContent(), ingredient.getContentList(), isInContent);
+        ingredient.getContent(), ingredient.getIngredient_image(), ingredient.getContentList(), isInContent);
     }
 }

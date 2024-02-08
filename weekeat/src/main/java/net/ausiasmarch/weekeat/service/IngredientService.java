@@ -35,7 +35,7 @@ public class IngredientService {
 
         ///////
         return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(),
-                ingredient.getContent(), ingredient.getContentList(), false);
+                ingredient.getContent(),ingredient.getIngredient_image(), ingredient.getContentList(), false);
         // oIngredientRepository.findById(id)
         // .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
     }
@@ -76,7 +76,7 @@ public class IngredientService {
 
     private IngredientDTO mapToIngredientDTO(IngredientEntity ingredient) {
         return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(),
-                ingredient.getContent(), ingredient.getContentList(), false);
+                ingredient.getContent(), ingredient.getIngredient_image(), ingredient.getContentList(), false);
     }
 
     public Long delete(Long id) {
