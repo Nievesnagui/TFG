@@ -70,7 +70,7 @@ public class RecipeService {
     }
 
     public Page<RecipeDTO> geRecipesByUser(Long id_user, Pageable oPageable) {
-        return filterRecipe(id_user,oPageable);
+        return filterRecipe(id_user, oPageable);
     }
 
     private Page<RecipeDTO> filterRecipe(Long id_user, Pageable oPageable) {
@@ -88,16 +88,17 @@ public class RecipeService {
 
     }
 
-@Autowired
+    @Autowired
     private EntityManager entityManager;
 
     public Page<RecipeDTO> getPageByContentFilter(Pageable pageable, Long id_ingredient) {
         String queryString = "SELECT r FROM RecipeEntity r JOIN r.content c WHERE c.id_ingredient.id = :id_ingredient";
         TypedQuery<RecipeEntity> query = entityManager.createQuery(queryString, RecipeEntity.class);
         query.setParameter("id_ingredient", id_ingredient);
-        query.setFirstResult((int)pageable.getOffset());
+        query.setFirstResult((int) pageable.getOffset());
         query.setMaxResults(pageable.getPageSize());
-        Page<RecipeEntity> page = new PageImpl<>(query.getResultList(), pageable, countRecipesWithIngredient(id_ingredient));
+        Page<RecipeEntity> page = new PageImpl<>(query.getResultList(), pageable,
+                countRecipesWithIngredient(id_ingredient));
         return page.map(RecipeDTO::fromRecipe);
     }
 
@@ -107,14 +108,14 @@ public class RecipeService {
         countQuery.setParameter("id_ingredient", id_ingredient);
         return countQuery.getSingleResult();
     }
-    
+
     public Long delete(Long id) {
         RecipeEntity recipe = oRecipeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
         oRecipeRepository.deleteById(id);
-       for (ContentEntity content : recipe.getContent()) {
-        cContentRepository.delete(content);
-    }
+        for (ContentEntity content : recipe.getContent()) {
+            cContentRepository.delete(content);
+        }
         return id;
     }
 

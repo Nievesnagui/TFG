@@ -1,13 +1,18 @@
 package net.ausiasmarch.weekeat.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import net.ausiasmarch.weekeat.api.dto.IngredientDTO;
+import net.ausiasmarch.weekeat.api.dto.RecipeDTO;
 import net.ausiasmarch.weekeat.entity.IngredientEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
 import net.ausiasmarch.weekeat.repository.IngredientRepository;
@@ -35,7 +40,7 @@ public class IngredientService {
 
         ///////
         return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(),
-                ingredient.getContent(),ingredient.getIngredient_image(), ingredient.getContentList(), false);
+                ingredient.getContent(), ingredient.getIngredient_image(), ingredient.getContentList(), false);
         // oIngredientRepository.findById(id)
         // .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
     }
@@ -62,16 +67,37 @@ public class IngredientService {
         return oIngredientRepository.save(oIngredientEntity2);
     }
 
-    public Page<IngredientDTO> getPage(Pageable pageable, Long id_type) {
+    public Page<IngredientDTO> getPage(Pageable pageable) {
         return oIngredientRepository.findAll(pageable)
                 .map(ingredient -> mapToIngredientDTO(ingredient));
     }
+
+    public Page<IngredientDTO> getIngredientsByType(Long id_type, Pageable oPageable) {
+        return filterByIngredient(id_type, oPageable);
+    }
+
+    private Page<IngredientDTO> filterByIngredient(Long id_type, Pageable oPageable) {
+        if (id_type == null) {
+            return oIngredientRepository.findAll(oPageable).map(IngredientDTO::fromIngredient);
+        } else {
+            List<IngredientDTO> resultadoFiltro = oIngredientRepository.findAll().stream()
+                    .filter(ingredient -> ingredient.getId_type().getId().equals(id_type))
+                    .map(IngredientDTO::fromIngredient)
+                    .collect(Collectors.toList());
+    
+            return new PageImpl<>(resultadoFiltro, oPageable, resultadoFiltro.size());
+        }
+    }
+    
+    
+    
 
     public Page<IngredientDTO> getPageByContentFilter(Pageable pageable, Long id_recipe) {
         var contents = oContentService.getContentsByRecipe(id_recipe, pageable);
         var ingredientsInRecipe = contents.map(c -> c.ingredient().getId()).toList();
         return oIngredientRepository.findAll(pageable)
-                .map(ingredient -> IngredientDTO.fromIngredient(ingredient, ingredientsInRecipe.stream().anyMatch(id -> ingredient.getId().equals(id))));
+                .map(ingredient -> IngredientDTO.fromIngredient(ingredient,
+                        ingredientsInRecipe.stream().anyMatch(id -> ingredient.getId().equals(id))));
     }
 
     private IngredientDTO mapToIngredientDTO(IngredientEntity ingredient) {

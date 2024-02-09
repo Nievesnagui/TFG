@@ -24,7 +24,7 @@ import net.ausiasmarch.weekeat.service.IngredientService;
 @RestController
 @RequestMapping("/ingredient")
 public class IngredientApi {
-    
+
     @Autowired
     IngredientService oIngredientService;
 
@@ -51,19 +51,25 @@ public class IngredientApi {
 
     @GetMapping("")
     public ResponseEntity<Page<IngredientDTO>> getPage(Pageable oPageable,
-    @RequestParam(value = "id_type", required = false) Long id_type) {
-        return ResponseEntity.ok(oIngredientService.getPage(oPageable, id_type));
+            @RequestParam(value = "id_type", required = false) Long id_type) {
+        if (id_type == null) {
+            return ResponseEntity.ok(oIngredientService.getPage(oPageable)); // Llamar al método getPage() sin pasar id_type
+        } else {
+            return ResponseEntity.ok(oIngredientService.getIngredientsByType(id_type, oPageable));
+        }
     }
+    
 
-    //Pensar otro nombre
+    // Pensar otro nombre
     @GetMapping("/byContentFilter")
-    public ResponseEntity<Page<IngredientDTO>> getPageByContentFilter(Pageable oPageable, @RequestParam(value = "id_recipe", required = true)Long id_recipe ) {
-        return ResponseEntity.ok(oIngredientService.getPageByContentFilter(oPageable,id_recipe));
+    public ResponseEntity<Page<IngredientDTO>> getPageByContentFilter(Pageable oPageable,
+            @RequestParam(value = "id_recipe", required = true) Long id_recipe) {
+        return ResponseEntity.ok(oIngredientService.getPageByContentFilter(oPageable, id_recipe));
     }
 
     @GetMapping("/byName/{name}")
     public ResponseEntity<IngredientEntity> get(@PathVariable("name") String name) {
         return ResponseEntity.ok(oIngredientService.getByName(name));
     }
-    
+
 }
