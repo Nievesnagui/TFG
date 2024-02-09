@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import net.ausiasmarch.weekeat.api.dto.IngredientDTO;
 import net.ausiasmarch.weekeat.api.dto.RecipeDTO;
 import net.ausiasmarch.weekeat.entity.RecipeEntity;
 import net.ausiasmarch.weekeat.service.RecipeService;
@@ -58,6 +59,11 @@ public class RecipeApi {
             return ResponseEntity.ok(oRecipeService.getPage(oPageable, id_user));
 
         }
+    }
+
+     @GetMapping("/byContentFilter")
+    public ResponseEntity<Page<RecipeDTO>> getPageByContentFilter(Pageable oPageable, @RequestParam(value = "id_ingredient", required = true)Long id_ingredient ) {
+        return ResponseEntity.ok(oRecipeService.getPageByContentFilter(oPageable,id_ingredient));
     }
 
     @GetMapping("/byName/{name}")

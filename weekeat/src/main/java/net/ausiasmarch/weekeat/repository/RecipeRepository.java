@@ -9,6 +9,7 @@ import net.ausiasmarch.weekeat.entity.RecipeEntity;
 
 public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
     Optional<RecipeEntity> findByName(String name);
+    
 
     @Modifying
     @Query(value = "ALTER TABLE recipe AUTO_INCREMENT = 1", nativeQuery = true)

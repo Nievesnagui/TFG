@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import net.ausiasmarch.weekeat.api.dto.IngredientDTO;
 import net.ausiasmarch.weekeat.api.dto.RecipeDTO;
 import net.ausiasmarch.weekeat.entity.ContentEntity;
 import net.ausiasmarch.weekeat.entity.RecipeEntity;
@@ -25,6 +29,9 @@ public class RecipeService {
 
     @Autowired
     ContentRepository cContentRepository;
+
+    @Autowired
+    ContentService oContentService;
 
     @Autowired
     HttpServletRequest oHttpServletRequest;
@@ -81,6 +88,26 @@ public class RecipeService {
 
     }
 
+@Autowired
+    private EntityManager entityManager;
+
+    public Page<RecipeDTO> getPageByContentFilter(Pageable pageable, Long id_ingredient) {
+        String queryString = "SELECT r FROM RecipeEntity r JOIN r.content c WHERE c.id_ingredient.id = :id_ingredient";
+        TypedQuery<RecipeEntity> query = entityManager.createQuery(queryString, RecipeEntity.class);
+        query.setParameter("id_ingredient", id_ingredient);
+        query.setFirstResult((int)pageable.getOffset());
+        query.setMaxResults(pageable.getPageSize());
+        Page<RecipeEntity> page = new PageImpl<>(query.getResultList(), pageable, countRecipesWithIngredient(id_ingredient));
+        return page.map(RecipeDTO::fromRecipe);
+    }
+
+    private long countRecipesWithIngredient(Long id_ingredient) {
+        String countQueryString = "SELECT COUNT(r) FROM RecipeEntity r JOIN r.content c WHERE c.id_ingredient.id = :id_ingredient";
+        TypedQuery<Long> countQuery = entityManager.createQuery(countQueryString, Long.class);
+        countQuery.setParameter("id_ingredient", id_ingredient);
+        return countQuery.getSingleResult();
+    }
+    
     public Long delete(Long id) {
         RecipeEntity recipe = oRecipeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
