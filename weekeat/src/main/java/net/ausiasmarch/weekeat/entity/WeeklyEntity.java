@@ -33,9 +33,6 @@ public class WeeklyEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate init_date;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate end_date;
-
 
     @JsonManagedReference("weekly-schedule")
     @OneToMany(mappedBy = "id_weekly", fetch = FetchType.EAGER)
@@ -54,19 +51,6 @@ public class WeeklyEntity {
         this.id = id;
         this.id_user = id_user;
         this.init_date = init_date;
-    }
-
-    public WeeklyEntity(UserEntity id_user, LocalDate init_date, LocalDate end_date) {
-        this.id_user = id_user;
-        this.init_date = init_date;
-        this.end_date = end_date;
-    }
-
-    public WeeklyEntity(Long id, UserEntity id_user, LocalDate init_date, LocalDate end_date) {
-        this.id = id;
-        this.id_user = id_user;
-        this.init_date = init_date;
-        this.end_date = end_date;
     }
 
     public Long getId() {
@@ -91,14 +75,6 @@ public class WeeklyEntity {
 
     public void setInit_date(LocalDate init_date) {
         this.init_date = init_date;
-    }
-
-    public LocalDate getEnd_date() {
-        return end_date;
-    }
-
-    public void setEnd_date(LocalDate end_date) {
-        this.end_date = end_date;
     }
 
     public List<ScheduleEntity> getSchedulesList() {

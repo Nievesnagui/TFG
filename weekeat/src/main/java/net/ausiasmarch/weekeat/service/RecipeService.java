@@ -16,9 +16,11 @@ import jakarta.transaction.Transactional;
 import net.ausiasmarch.weekeat.api.dto.IngredientDTO;
 import net.ausiasmarch.weekeat.api.dto.RecipeDTO;
 import net.ausiasmarch.weekeat.entity.ContentEntity;
+import net.ausiasmarch.weekeat.entity.FavRecipeEntity;
 import net.ausiasmarch.weekeat.entity.RecipeEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
 import net.ausiasmarch.weekeat.repository.ContentRepository;
+import net.ausiasmarch.weekeat.repository.FavRecipeRepository;
 import net.ausiasmarch.weekeat.repository.RecipeRepository;
 
 @Service
@@ -29,6 +31,9 @@ public class RecipeService {
 
     @Autowired
     ContentRepository cContentRepository;
+
+    @Autowired
+    FavRecipeRepository oFavRecipeRepository;
 
     @Autowired
     ContentService oContentService;
@@ -115,6 +120,9 @@ public class RecipeService {
         oRecipeRepository.deleteById(id);
         for (ContentEntity content : recipe.getContent()) {
             cContentRepository.delete(content);
+        }
+        for (FavRecipeEntity fav : recipe.getFavs()) {
+            oFavRecipeRepository.delete(fav);
         }
         return id;
     }

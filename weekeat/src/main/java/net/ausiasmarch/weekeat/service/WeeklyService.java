@@ -25,7 +25,7 @@ public class WeeklyService {
 
     public WeeklyDTO get(Long id) {
         var weekly = oWeeklyRepository.findById(id).orElse(new WeeklyEntity());
-        return new WeeklyDTO(id, weekly.getId_user(), weekly.getInit_date(), weekly.getEnd_date(), weekly.getSchedulesList());
+        return new WeeklyDTO(id, weekly.getId_user(), weekly.getInit_date(), weekly.getSchedulesList());
     }
 
     public Long create(WeeklyEntity oWeeklyEntity) {
@@ -38,7 +38,6 @@ public class WeeklyService {
           .orElseThrow(() -> new ResourceNotFoundException("Weekly not found"));
           oWeeklyEntity2.setId_user(oWeeklyEntity.getId_user());
           oWeeklyEntity2.setInit_date(oWeeklyEntity.getInit_date());
-          oWeeklyEntity2.setEnd_date(oWeeklyEntity.getEnd_date());
         return oWeeklyRepository.save(oWeeklyEntity2);
     }
 
