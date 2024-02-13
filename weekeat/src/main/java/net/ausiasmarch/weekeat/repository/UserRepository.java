@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
   Optional<UserEntity> findByEmail(String email);
 
-  @Query(value = "SELECT * FROM user WHERE length(?1) >= 3 AND (name LIKE %?1% OR surname LIKE %?1% OR username LIKE %?1% OR email LIKE %?1%)", nativeQuery = true)
+  @Query(value = "SELECT * FROM user WHERE length(?1) >= 1 AND (name LIKE %?1% OR surname LIKE %?1% OR username LIKE %?1% OR email LIKE %?1%)", nativeQuery = true)
   Page<UserEntity> findByUserByNameOrSurnameContainingIgnoreCase(String searchText,
       String filter, String filter2, String filter3, Pageable pageable);
 

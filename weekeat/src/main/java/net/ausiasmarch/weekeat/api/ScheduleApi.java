@@ -47,7 +47,7 @@ public class ScheduleApi {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<ScheduleEntity>> getPage(Pageable oPageable) {
+    public ResponseEntity<Page<ScheduleDTO>> getPage(Pageable oPageable) {
         return  ResponseEntity.ok(oScheduleService.getPage(oPageable));
     }
     

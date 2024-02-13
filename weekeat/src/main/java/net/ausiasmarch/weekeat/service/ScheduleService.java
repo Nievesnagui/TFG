@@ -43,8 +43,8 @@ public class ScheduleService {
         return oScheduleRepository.save(oScheduleEntity2);
     }
 
-    public Page<ScheduleEntity> getPage(Pageable oPageable) {
-        return oScheduleRepository.findAll(oPageable);
+    public Page<ScheduleDTO> getPage(Pageable oPageable) {
+        return oScheduleRepository.findAll(oPageable).map(ScheduleDTO::fromSchedule);
     }
 
     public Long delete(Long id) {

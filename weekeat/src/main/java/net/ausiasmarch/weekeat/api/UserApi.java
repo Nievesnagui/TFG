@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -58,8 +59,9 @@ public class UserApi {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<UserEntity>> getPage(Pageable oPageable) {
-        return ResponseEntity.ok(oUserService.getPage(oPageable));
+    public ResponseEntity<Page<UserEntity>> getPage(Pageable oPageable,
+     @RequestParam(name = "filter", required = false) String strFilter) {
+        return ResponseEntity.ok(oUserService.getPage(oPageable, strFilter));
     }
 
     @PostMapping("/populate/{amount}")

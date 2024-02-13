@@ -45,8 +45,21 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found by username"));
     }
 
-    public Page<UserEntity> getPage(Pageable oPageable) {
-        return oUserRepository.findAll(oPageable);
+    public Page<UserEntity> getPage(Pageable oPageable, String filter) {
+         Page<UserEntity> page;
+
+        if (filter == null || filter.isEmpty() || filter.trim().isEmpty()) {
+            if (oSessionService.isAdmin()) {
+                page = oUserRepository.findAll(oPageable);
+            } else {
+               // page = oUserRepository.findAllByActiveTrue(oPageable);
+               page = oUserRepository.findAll(oPageable);
+            }
+        } else {
+            page = oUserRepository.findByUserByNameOrSurnameContainingIgnoreCase(
+                    filter, filter, filter, filter, oPageable);
+        }
+        return page;
     }
 
     public Long create(UserEntity oUserEntity) {
@@ -92,7 +105,7 @@ public class UserService {
         oUserRepository.save(oUserEntity1);
         oUserEntity1 = new UserEntity("usuario", "Admin", "Apellido", "mail2@mail.com",
                 "658945123", "c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261",
-                false);
+                true);
         oUserRepository.save(oUserEntity1);
         return oUserRepository.count();
     }
@@ -108,7 +121,7 @@ public class UserService {
                     .doNormalizeString(
                             name.substring(0, 3) + surname.substring(1, 3) + i);
             oUserRepository.save(
-                    new UserEntity(username, name, surname, email, "654123654", password, false));
+                    new UserEntity(username, name, surname, email, "654123654", password, true));
         }
         return oUserRepository.count();
 

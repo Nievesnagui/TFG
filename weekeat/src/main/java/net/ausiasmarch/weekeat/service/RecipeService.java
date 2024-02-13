@@ -13,7 +13,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
-import net.ausiasmarch.weekeat.api.dto.IngredientDTO;
 import net.ausiasmarch.weekeat.api.dto.RecipeDTO;
 import net.ausiasmarch.weekeat.entity.ContentEntity;
 import net.ausiasmarch.weekeat.entity.FavRecipeEntity;

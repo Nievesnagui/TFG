@@ -7,9 +7,9 @@ import net.ausiasmarch.weekeat.entity.ScheduleEntity;
 import net.ausiasmarch.weekeat.entity.UserEntity;
 import net.ausiasmarch.weekeat.entity.WeeklyEntity;
 
-public record WeeklyDTO(Long id, UserEntity user, LocalDate init_date, 
+public record WeeklyDTO(Long id, UserEntity user, LocalDate init_date,
         List<ScheduleEntity> schedules) {
-    public static WeeklyDTO fromWeekly(WeeklyEntity weekly){
+    public static WeeklyDTO fromWeekly(WeeklyEntity weekly) {
         return new WeeklyDTO(weekly.getId(), weekly.getId_user(), weekly.getInit_date(), weekly.getSchedulesList());
     }
 }
