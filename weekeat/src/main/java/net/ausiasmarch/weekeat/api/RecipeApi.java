@@ -49,20 +49,23 @@ public class RecipeApi {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<RecipeDTO>> getPage(Pageable oPageable, 
-    @RequestParam(value = "id_user", required = false) Long id_user) {
-
-        if(id_user != null){
+    public ResponseEntity<Page<RecipeDTO>> getPage(Pageable oPageable,
+            @RequestParam(value = "id_user", required = false) Long id_user,
+            @RequestParam(required = false) String filter) {
+        if (filter == null && id_user == null) {
+            return ResponseEntity.ok(oRecipeService.getPage(oPageable));
+        } else if (id_user != null) {
             return ResponseEntity.ok(oRecipeService.geRecipesByUser(id_user, oPageable));
-        } else{
-            return ResponseEntity.ok(oRecipeService.getPage(oPageable, id_user));
-
+        } else {
+            // Llama al método getPageByContentFilter en lugar de getPage
+            return ResponseEntity.ok(oRecipeService.getPageByContentFilter(filter, oPageable));
         }
     }
 
-     @GetMapping("/byContentFilter")
-    public ResponseEntity<Page<RecipeDTO>> getPageByContentFilter(Pageable oPageable, @RequestParam(value = "id_ingredient", required = true)Long id_ingredient ) {
-        return ResponseEntity.ok(oRecipeService.getPageByContentFilter(oPageable,id_ingredient));
+    @GetMapping("/byContentFilter")
+    public ResponseEntity<Page<RecipeDTO>> getPageByContentFilter(Pageable oPageable,
+            @RequestParam(value = "id_ingredient", required = true) Long id_ingredient) {
+        return ResponseEntity.ok(oRecipeService.getPageByContentFilter(oPageable, id_ingredient));
     }
 
     @GetMapping("/byName/{name}")

@@ -1,15 +1,22 @@
 package net.ausiasmarch.weekeat.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import net.ausiasmarch.weekeat.api.dto.ScheduleDTO;
 import net.ausiasmarch.weekeat.entity.ScheduleEntity;
+import net.ausiasmarch.weekeat.entity.WeeklyEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
 import net.ausiasmarch.weekeat.repository.ScheduleRepository;
+
+import org.modelmapper.ModelMapper;
 
 @Service
 public class ScheduleService {
@@ -22,6 +29,10 @@ public class ScheduleService {
 
     @Autowired
     SessionService oSessionService;
+
+    //Prueba
+    @Autowired
+    private ModelMapper modelMapper;
 
     public ScheduleDTO get(Long id) {
         var schedule = oScheduleRepository.findById(id).orElse(new ScheduleEntity());
@@ -45,6 +56,39 @@ public class ScheduleService {
 
     public Page<ScheduleDTO> getPage(Pageable oPageable) {
         return oScheduleRepository.findAll(oPageable).map(ScheduleDTO::fromSchedule);
+    }
+    public Page<ScheduleDTO> getPageByWeekly(Pageable oPageable, Long id_weekly) {
+        return filterByWeekly(id_weekly, oPageable); 
+    }
+
+    public Page<ScheduleDTO> getPageByUserId(Long id_user, Pageable oPageable) {
+        return oScheduleRepository.findSchedulesByUserId(oPageable,id_user ).map(ScheduleDTO::fromSchedule); 
+    }
+
+    private Page<ScheduleDTO> filterByWeekly(Long id_weekly, Pageable oPageable) {
+        if(id_weekly == null) {
+        return oScheduleRepository.findAll(oPageable).map(ScheduleDTO::fromSchedule);
+        } else {
+            List<ScheduleDTO> resultadoFiltro =  oScheduleRepository.findAll().stream()
+            .filter(schedule -> schedule.getId_weekly().getId().equals(id_weekly))
+            .map(ScheduleDTO::fromSchedule)
+            .collect(Collectors.toList());
+            return new PageImpl<>(resultadoFiltro, oPageable, resultadoFiltro.size());
+        }
+    }
+
+    //Prueba
+    public ScheduleDTO[] getScheduleByWeekly(WeeklyEntity id_weekly) {
+        List<ScheduleDTO> scheduleEntities = oScheduleRepository.findSchedulesArrayByWeeklyId(id_weekly);
+        ScheduleDTO[] scheduleDTOs = new ScheduleDTO[scheduleEntities.size()];
+        for (int i = 0; i < scheduleEntities.size(); i++) {
+            scheduleDTOs[i] = modelMapper.map(scheduleEntities.get(i), ScheduleDTO.class);
+        }
+        return scheduleDTOs;
+    }
+    public ScheduleDTO getScheduleByWeekIdAndRecipeId(Long id_weekly, Long id_recipe, String type, String day) {
+        var schedule = oScheduleRepository.findScheduleByWeekIdAndRecipeId(id_weekly, id_recipe, type, day);
+        return ScheduleDTO.fromSchedule(schedule);
     }
 
     public Long delete(Long id) {

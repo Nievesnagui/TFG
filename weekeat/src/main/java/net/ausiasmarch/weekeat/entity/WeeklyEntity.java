@@ -38,8 +38,28 @@ public class WeeklyEntity {
     @OneToMany(mappedBy = "id_weekly", fetch = FetchType.EAGER)
     private List<ScheduleEntity> schedules;
     
+    public WeeklyEntity(Long id, UserEntity id_user, LocalDate init_date, ScheduleEntity schedule) {
+        this.id = id;
+        this.id_user = id_user;
+        this.init_date = init_date;
+        this.schedules = List.of(schedule);
+    }
+
+    public WeeklyEntity(Long id, UserEntity id_user, LocalDate init_date, List<ScheduleEntity> schedules) {
+        this.id = id;
+        this.id_user = id_user;
+        this.init_date = init_date;
+        this.schedules = schedules;
+    }
+
     public WeeklyEntity() {
         schedules = new ArrayList<>();
+    }
+
+    public WeeklyEntity(UserEntity id_user, LocalDate init_date, List<ScheduleEntity> schedules) {
+        this.id_user = id_user;
+        this.init_date = init_date;
+        this.schedules = schedules;
     }
 
     public WeeklyEntity(UserEntity id_user, LocalDate init_date) {

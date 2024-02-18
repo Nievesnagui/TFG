@@ -6,6 +6,11 @@ import net.ausiasmarch.weekeat.entity.WeeklyEntity;
 
 public record ScheduleDTO(Long id, WeeklyEntity weekly, RecipeEntity recipe, String type, String day) {
     public static ScheduleDTO fromSchedule(ScheduleEntity schedule){
-       return new ScheduleDTO(schedule.getId(), schedule.getId_weekly(), schedule.getId_recipe(), schedule.getType(), schedule.getDay());
+        if(schedule != null) {
+            return new ScheduleDTO(schedule.getId(), schedule.getId_weekly(), schedule.getId_recipe(), schedule.getType(), schedule.getDay());
+        } else{
+            return new ScheduleDTO(0l, null, null, "", "");
+        }
     }
+    
 }

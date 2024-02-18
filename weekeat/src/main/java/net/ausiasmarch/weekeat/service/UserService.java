@@ -84,13 +84,14 @@ public class UserService {
 
     public Long delete(Long id) {
         oSessionService.onlyAdmins();
-        oUserRepository.deleteById(id);
 
         UserEntity user = oUserRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         for (FavRecipeEntity fav : user.getFavsList()) {
             oFavRecipeRepository.delete(fav);
         }
+        oUserRepository.deleteById(id);
+
         return id;
     }
 

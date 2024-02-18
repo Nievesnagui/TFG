@@ -1,5 +1,6 @@
 package net.ausiasmarch.weekeat.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import net.ausiasmarch.weekeat.api.dto.WeeklyDTO;
+import net.ausiasmarch.weekeat.api.dto.WeeklyWithSchedulesDTO;
 import net.ausiasmarch.weekeat.entity.ScheduleEntity;
 import net.ausiasmarch.weekeat.entity.WeeklyEntity;
 import net.ausiasmarch.weekeat.exception.ResourceNotFoundException;
@@ -34,7 +36,7 @@ public class WeeklyService {
 
     public WeeklyDTO get(Long id) {
         var weekly = oWeeklyRepository.findById(id).orElse(new WeeklyEntity());
-        return new WeeklyDTO(id, weekly.getId_user(), weekly.getInit_date(), weekly.getSchedulesList());
+        return new WeeklyDTO(id, weekly.getId_user(), weekly.getInit_date());
     }
 
     public Long create(WeeklyEntity oWeeklyEntity) {
@@ -56,12 +58,21 @@ public class WeeklyService {
     }
 
     private WeeklyDTO mapWeeklyDTO(WeeklyEntity weekly){
-        return new WeeklyDTO(weekly.getId(), weekly.getId_user(), weekly.getInit_date(), weekly.getSchedulesList());
+        return new WeeklyDTO(weekly.getId(), weekly.getId_user(), weekly.getInit_date());
     }
 
     public Page<WeeklyDTO> getWeeklyByUser(Pageable oPageable, Long id_user) {
       return filterWeekly(oPageable, id_user);
     }
+
+    public Page<WeeklyWithSchedulesDTO> getWeeklyWithSchedulesByUser( Long id_user,Pageable oPageable) {
+        return oWeeklyRepository.findWeeklyWithSchedulesByUser(id_user, oPageable).map(WeeklyWithSchedulesDTO::fromWeekly);
+      }
+
+      public WeeklyDTO getBetweenDates(LocalDate start, LocalDate end, Long id_user) {
+        var weekly = oWeeklyRepository.findBetweenDates(start, end, id_user);
+        return new WeeklyDTO(weekly.getId(), weekly.getId_user(), weekly.getInit_date());
+      }
 
     public Page<WeeklyDTO> filterWeekly(Pageable oPageable, Long id_user){
           List<WeeklyDTO> result = oWeeklyRepository.findAll().stream()

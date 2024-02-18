@@ -68,11 +68,29 @@ public class RecipeService {
         return oRecipeRepository.save(oRecipeEntity2);
     }
 
-    public Page<RecipeDTO> getPage(Pageable oPageable, Long id_user) {
+    public Page<RecipeDTO> getPage(Pageable oPageable) {
         return oRecipeRepository.findAll(oPageable)
                 .map(RecipeDTO::fromRecipe);
     }
-
+    public Page<RecipeDTO> getPageByContentFilter(String searchText, Pageable pageable) {
+        Page<Object[]> results = oRecipeRepository.findByNameIgnoringCase(searchText, pageable);
+        List<RecipeDTO> dtos = results.stream()
+            .map(row -> new RecipeDTO(
+                (Long) row[0], // id
+                null, // id_user - Puedes establecerlo en null ya que no se selecciona en la consulta
+                (String) row[1], // name
+                (String) row[2], // description
+                (String) row[3], // recipe_image
+                (String) row[4], // process
+                null, // content - No está seleccionado en la consulta
+                null, // favs - No está seleccionado en la consulta
+                null, // schedules - No está seleccionado en la consulta
+                false, // hasIngredient - Puedes establecerlo en false por defecto
+                false
+            ))
+            .collect(Collectors.toList());
+        return new PageImpl<>(dtos, pageable, results.getTotalElements());
+    }
     public Page<RecipeDTO> geRecipesByUser(Long id_user, Pageable oPageable) {
         return filterRecipe(id_user, oPageable);
     }

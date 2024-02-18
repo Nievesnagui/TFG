@@ -31,8 +31,16 @@ public class FavRecipeService {
         return oFavRecipeRepository.save(oFavRecipeEntity).getId();
     }
 
-    public Page<FavRecipeEntity> getPage(Pageable oPageable) {
-        return oFavRecipeRepository.findAll(oPageable);
+     public Page<FavRecipeDTO> getPageByUserId(Pageable oPageable, Long id_user) {
+        return oFavRecipeRepository.findFavsByUserId(oPageable, id_user).map(FavRecipeDTO::fromFav); 
+    }
+
+    public Page<FavRecipeDTO> getPageByUserIdAndRecipeId(Pageable oPageable, Long id_user, Long id_recipe) {
+        return oFavRecipeRepository.findFavsByUserIdAndRecipeId(oPageable, id_user, id_recipe).map(FavRecipeDTO::fromFav); 
+    }
+
+    public Page<FavRecipeDTO> getPage(Pageable oPageable) {
+        return oFavRecipeRepository.findAll(oPageable).map(FavRecipeDTO::fromFav);
     }
 
     public Long delete(Long id_recipe) {
