@@ -34,17 +34,16 @@ public class IngredientService {
     @Autowired
     SessionService oSessionService;
 
-    public /* IngredientEntity */ IngredientDTO get(Long id) {
-        var ingredient = oIngredientRepository.findById(id).orElse(new IngredientEntity());
+    public IngredientDTO get(Long id) {
 
-        ///////
+        oSessionService.onlyAdminsOrUsers();
+        var ingredient = oIngredientRepository.findById(id).orElse(new IngredientEntity());
         return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(),
                 ingredient.getContent(), ingredient.getIngredient_image(), ingredient.getContentList(), false);
-        // oIngredientRepository.findById(id)
-        // .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
     }
 
     public IngredientEntity getByName(String name) {
+        oSessionService.onlyAdminsOrUsers();
         return oIngredientRepository.findByName(name)
                 .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found by name"));
     }
@@ -53,7 +52,7 @@ public class IngredientService {
         oSessionService.onlyAdmins();
         oIngredientEntity.setId(null);
         return oIngredientRepository.save(oIngredientEntity).getId();
-        // Creo que debería estar sin el getId
+   
     }
 
     public IngredientEntity update(IngredientEntity oIngredientEntity) {
@@ -67,15 +66,18 @@ public class IngredientService {
     }
 
     public Page<IngredientDTO> getPage(Pageable pageable) {
+        oSessionService.onlyAdminsOrUsers();
         return oIngredientRepository.findAll(pageable)
                 .map(ingredient -> mapToIngredientDTO(ingredient));
     }
 
     public Page<IngredientDTO> getIngredientsByType(Long id_type, Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         return filterByIngredient(id_type, oPageable);
     }
 
     private Page<IngredientDTO> filterByIngredient(Long id_type, Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         if (id_type == null) {
             return oIngredientRepository.findAll(oPageable).map(IngredientDTO::fromIngredient);
         } else {
@@ -92,6 +94,7 @@ public class IngredientService {
     
 
     public Page<IngredientDTO> getPageByContentFilter(Pageable pageable, Long id_recipe) {
+        oSessionService.onlyAdminsOrUsers();
         var contents = oContentService.getContentsByRecipe(id_recipe, pageable);
         var ingredientsInRecipe = contents.map(c -> c.ingredient().getId()).toList();
         return oIngredientRepository.findAll(pageable)
@@ -100,6 +103,7 @@ public class IngredientService {
     }
 
     private IngredientDTO mapToIngredientDTO(IngredientEntity ingredient) {
+        oSessionService.onlyAdminsOrUsers();
         return new IngredientDTO(ingredient.getId(), ingredient.getId_type(), ingredient.getName(),
                 ingredient.getContent(), ingredient.getIngredient_image(), ingredient.getContentList(), false);
     }
@@ -108,13 +112,6 @@ public class IngredientService {
         oSessionService.onlyAdmins();
         oIngredientRepository.deleteById(id);
         return id;
-        // Creo que debería ser como comento abajo:
-        /*
-         * IngredientEntity oIngredient2 = oIngredientRepository.findById(id)
-         * .orElseThrow(() -> new ResourceNotFoundException("No such resource"));
-         * oIngredientRepository.deleteById(id);
-         * return oIngredient2;
-         */
     }
 
     @Transactional

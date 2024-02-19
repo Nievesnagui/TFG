@@ -49,15 +49,18 @@ public class RecipeService {
     }
 
     public RecipeEntity getByName(String name) {
+        oSessionService.onlyAdminsOrUsers();
         return oRecipeRepository.findByName(name)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found by name"));
     }
 
     public Long create(RecipeEntity oRecipeEntity) {
+        oSessionService.onlyAdminsOrUsers();
         return oRecipeRepository.save(oRecipeEntity).getId();
     }
 
     public RecipeEntity update(RecipeEntity oRecipeEntity) {
+        oSessionService.onlyAdminsOrUsers();
         RecipeEntity oRecipeEntity2 = oRecipeRepository.findById(oRecipeEntity.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
         oRecipeEntity2.setName(oRecipeEntity.getName());
@@ -92,6 +95,7 @@ public class RecipeService {
         return new PageImpl<>(dtos, pageable, results.getTotalElements());
     }
     public Page<RecipeDTO> geRecipesByUser(Long id_user, Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         return filterRecipe(id_user, oPageable);
     }
 
@@ -132,6 +136,7 @@ public class RecipeService {
     }
 
     public Long delete(Long id) {
+        oSessionService.onlyAdminsOrUsers();
         RecipeEntity recipe = oRecipeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
         oRecipeRepository.deleteById(id);
@@ -146,6 +151,7 @@ public class RecipeService {
 
     @Transactional
     public Long empty() {
+        oSessionService.onlyAdmins();
         oRecipeRepository.deleteAll();
         oRecipeRepository.resetAutoIncrement();
         oRecipeRepository.flush();

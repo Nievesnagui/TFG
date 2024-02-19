@@ -27,16 +27,19 @@ public class TypeService {
     SessionService oSessionService;
 
     public TypeEntity get(Long id) {
+        oSessionService.onlyAdminsOrUsers();
         return oTypeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Type not found"));
     }
 
     public TypeEntity getByTypeName(String name) {
+        oSessionService.onlyAdminsOrUsers();
         return oTypeRepository.findByName(name)
                 .orElseThrow(() -> new ResourceNotFoundException("Type not found by name"));
     }
 
     public Page<TypeEntity> getPage(Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         return oTypeRepository.findAll(oPageable);
     }
 
@@ -67,6 +70,8 @@ public class TypeService {
     }
 
     public Long populate() {
+        oSessionService.onlyAdmins();
+
         oTypeRepository.save(new TypeEntity("Dairy"));
         oTypeRepository.save(new TypeEntity("Meat"));
         oTypeRepository.save(new TypeEntity("Meat Product"));

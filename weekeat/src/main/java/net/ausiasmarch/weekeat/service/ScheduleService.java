@@ -35,16 +35,19 @@ public class ScheduleService {
     private ModelMapper modelMapper;
 
     public ScheduleDTO get(Long id) {
+        oSessionService.onlyAdminsOrUsers();
         var schedule = oScheduleRepository.findById(id).orElse(new ScheduleEntity());
         return new ScheduleDTO(schedule.getId(), schedule.getId_weekly(), schedule.getId_recipe(), schedule.getType(), schedule.getDay());
     }
 
     public Long create(ScheduleEntity oScheduleEntity) {
+        oSessionService.onlyAdminsOrUsers();
         oScheduleEntity.setId(null);
         return oScheduleRepository.save(oScheduleEntity).getId();
     }
 
     public ScheduleEntity update(ScheduleEntity oScheduleEntity) {
+        oSessionService.onlyAdminsOrUsers();
         ScheduleEntity oScheduleEntity2 = oScheduleRepository.findById(oScheduleEntity.getId())
         .orElseThrow(() -> new ResourceNotFoundException("Schedule not found"));
           oScheduleEntity2.setId_weekly(oScheduleEntity.getId_weekly());
@@ -55,17 +58,21 @@ public class ScheduleService {
     }
 
     public Page<ScheduleDTO> getPage(Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         return oScheduleRepository.findAll(oPageable).map(ScheduleDTO::fromSchedule);
     }
     public Page<ScheduleDTO> getPageByWeekly(Pageable oPageable, Long id_weekly) {
+        oSessionService.onlyAdminsOrUsers();
         return filterByWeekly(id_weekly, oPageable); 
     }
 
     public Page<ScheduleDTO> getPageByUserId(Long id_user, Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         return oScheduleRepository.findSchedulesByUserId(oPageable,id_user ).map(ScheduleDTO::fromSchedule); 
     }
 
     private Page<ScheduleDTO> filterByWeekly(Long id_weekly, Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         if(id_weekly == null) {
         return oScheduleRepository.findAll(oPageable).map(ScheduleDTO::fromSchedule);
         } else {
@@ -77,8 +84,8 @@ public class ScheduleService {
         }
     }
 
-    //Prueba
     public ScheduleDTO[] getScheduleByWeekly(WeeklyEntity id_weekly) {
+        oSessionService.onlyAdminsOrUsers();
         List<ScheduleDTO> scheduleEntities = oScheduleRepository.findSchedulesArrayByWeeklyId(id_weekly);
         ScheduleDTO[] scheduleDTOs = new ScheduleDTO[scheduleEntities.size()];
         for (int i = 0; i < scheduleEntities.size(); i++) {
@@ -87,17 +94,20 @@ public class ScheduleService {
         return scheduleDTOs;
     }
     public ScheduleDTO getScheduleByWeekIdAndRecipeId(Long id_weekly, Long id_recipe, String type, String day) {
+        oSessionService.onlyAdminsOrUsers();
         var schedule = oScheduleRepository.findScheduleByWeekIdAndRecipeId(id_weekly, id_recipe, type, day);
         return ScheduleDTO.fromSchedule(schedule);
     }
 
     public Long delete(Long id) {
+        oSessionService.onlyAdminsOrUsers();
         oScheduleRepository.deleteById(id);
         return id;
     }
 
     @Transactional
     public Long empty(){
+        oSessionService.onlyAdmins();
         oScheduleRepository.deleteAll();
         oScheduleRepository.resetAutoIncrement();
         oScheduleRepository.flush();

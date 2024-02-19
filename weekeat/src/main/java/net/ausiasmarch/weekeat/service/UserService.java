@@ -36,18 +36,20 @@ public class UserService {
     private final String genericPasswd = "c9a4780375f66133954db3e1f51ab5503a31da7f963ccb29446e3f554a5a6261";
 
     public UserEntity get(Long id) {
+        oSessionService.onlyAdminsOrUsersWithIisOwnData(id);
         return oUserRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     public UserEntity getByUsername(String username) {
+        oSessionService.onlyAdminsOrUsers();
         return oUserRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found by username"));
     }
 
     public Page<UserEntity> getPage(Pageable oPageable, String filter) {
          Page<UserEntity> page;
-
+         oSessionService.onlyAdmins();
         if (filter == null || filter.isEmpty() || filter.trim().isEmpty()) {
             if (oSessionService.isAdmin()) {
                 page = oUserRepository.findAll(oPageable);
@@ -70,6 +72,7 @@ public class UserService {
     }
 
     public UserEntity update(UserEntity oUserEntity) {
+        oSessionService.onlyAdmins();
         UserEntity oUserEntityAux = oUserRepository.findById(oUserEntity.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         oUserEntityAux.setName(oUserEntity.getName());
@@ -84,7 +87,6 @@ public class UserService {
 
     public Long delete(Long id) {
         oSessionService.onlyAdmins();
-
         UserEntity user = oUserRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         for (FavRecipeEntity fav : user.getFavsList()) {
@@ -97,7 +99,7 @@ public class UserService {
 
     @Transactional
     public Long empty() {
-        // oSessionService.onlyAdmins();
+        oSessionService.onlyAdmins();
         oUserRepository.deleteAll();
         oUserRepository.resetAutoIncrement();
         UserEntity oUserEntity1 = new UserEntity("administrador", "Admin", "Apellido", "mail1@mail.com",
@@ -112,6 +114,7 @@ public class UserService {
     }
 
     public Long populate(Integer amount) {
+        oSessionService.onlyAdmins();
         for (int i = 0; i < amount; i++) {
             String password = "unapasswordsegura12345567789976543" + i;
             String name = DataGenerationHelper.getRadomName();

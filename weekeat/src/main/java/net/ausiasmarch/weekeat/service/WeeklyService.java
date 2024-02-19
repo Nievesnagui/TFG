@@ -35,16 +35,19 @@ public class WeeklyService {
     SessionService oSessionService;
 
     public WeeklyDTO get(Long id) {
+        oSessionService.onlyAdminsOrUsers();
         var weekly = oWeeklyRepository.findById(id).orElse(new WeeklyEntity());
         return new WeeklyDTO(id, weekly.getId_user(), weekly.getInit_date());
     }
 
     public Long create(WeeklyEntity oWeeklyEntity) {
+        oSessionService.onlyAdminsOrUsers();
         oWeeklyEntity.setId(null);
         return oWeeklyRepository.save(oWeeklyEntity).getId();
     }
 
     public WeeklyEntity update(WeeklyEntity oWeeklyEntity) {
+        oSessionService.onlyAdminsOrUsers();
         WeeklyEntity oWeeklyEntity2 = oWeeklyRepository.findById(oWeeklyEntity.getId())
           .orElseThrow(() -> new ResourceNotFoundException("Weekly not found"));
           oWeeklyEntity2.setId_user(oWeeklyEntity.getId_user());
@@ -53,28 +56,34 @@ public class WeeklyService {
     }
 
     public Page<WeeklyDTO> getPage(Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         return oWeeklyRepository.findAll(oPageable)
                     .map(weekly -> mapWeeklyDTO(weekly)); 
     }
 
     private WeeklyDTO mapWeeklyDTO(WeeklyEntity weekly){
+        oSessionService.onlyAdminsOrUsers();
         return new WeeklyDTO(weekly.getId(), weekly.getId_user(), weekly.getInit_date());
     }
 
     public Page<WeeklyDTO> getWeeklyByUser(Pageable oPageable, Long id_user) {
+        oSessionService.onlyAdminsOrUsers();
       return filterWeekly(oPageable, id_user);
     }
 
     public Page<WeeklyWithSchedulesDTO> getWeeklyWithSchedulesByUser( Long id_user,Pageable oPageable) {
+        oSessionService.onlyAdminsOrUsers();
         return oWeeklyRepository.findWeeklyWithSchedulesByUser(id_user, oPageable).map(WeeklyWithSchedulesDTO::fromWeekly);
       }
 
       public WeeklyDTO getBetweenDates(LocalDate start, LocalDate end, Long id_user) {
+        oSessionService.onlyAdminsOrUsers();
         var weekly = oWeeklyRepository.findBetweenDates(start, end, id_user);
         return new WeeklyDTO(weekly.getId(), weekly.getId_user(), weekly.getInit_date());
       }
 
     public Page<WeeklyDTO> filterWeekly(Pageable oPageable, Long id_user){
+        oSessionService.onlyAdminsOrUsers();
           List<WeeklyDTO> result = oWeeklyRepository.findAll().stream()
         .filter( weekly -> 
         {
@@ -91,6 +100,7 @@ public class WeeklyService {
     }
 
     public Long delete(Long id) {
+        oSessionService.onlyAdminsOrUsers();
         WeeklyEntity weekly = oWeeklyRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Could not find weekly"));
         oWeeklyRepository.deleteById(id);
@@ -103,6 +113,7 @@ public class WeeklyService {
 
     @Transactional
     public Long empty(){
+        oSessionService.onlyAdmins();
         oWeeklyRepository.deleteAll();
         oWeeklyRepository.resetAutoIncrement();
         oWeeklyRepository.flush();

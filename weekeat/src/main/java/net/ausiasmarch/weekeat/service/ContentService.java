@@ -31,30 +31,36 @@ public class ContentService {
     SessionService oSessionService;
 
     public ContentDTO get(Long id) {
+        oSessionService.onlyAdminsOrUsers();
         var content = oContentRepository.findById(id).orElse(new ContentEntity());
         return new ContentDTO(content.getId(), content.getId_ingredient(), content.getId_recipe());
     }
 
     public Long create(ContentEntity oContentEntity) {
+        oSessionService.onlyAdminsOrUsers();
         return oContentRepository.save(oContentEntity).getId();
     }
 
     public Page<ContentDTO> getPage(Pageable oPageable, Long id_recipe, Long id_ingredient) {
+        oSessionService.onlyAdminsOrUsers();
         return oContentRepository.findAll(oPageable)
                 .map(content -> mapToContentDTO(content));
     }
 
     private ContentDTO mapToContentDTO(ContentEntity content) {
+        oSessionService.onlyAdminsOrUsers();
         return new ContentDTO(content.getId(), content.getId_ingredient(), content.getId_recipe());
     }
 
     public Long delete(Long id) {
+        oSessionService.onlyAdminsOrUsers();
         oContentRepository.deleteById(id);
         return id;
     }
 
     @Transactional
     public Long empty() {
+        oSessionService.onlyAdmins();
         oContentRepository.deleteAll();
         oContentRepository.resetAutoIncrement();
         oContentRepository.flush();
